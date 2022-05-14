@@ -1,0 +1,57 @@
+<div class="pd10">
+    <div class="cf mg-h-5 mg-b10">
+		<div class="cf mg-h-5 mg-b10">
+			<div class="float-l w120 pd-h5">
+				<select id="printCallNo_srchType" class="form-control">
+					<option value="book_cde">도서코드</option>
+					<option value="title">책제목</option>
+					<option value="author_info">저자</option>
+					<option value="pub_info">출판사</option>
+				</select>
+			</div>
+			<div class="float-l w180 pd-h5">
+				<input type="text" id="printCallNo_bookKwd" class="form-control" @keyup.enter="getBookList();">
+			</div>
+			<div class="float-l pd-h5 txt-c media-mx-w767-w100p media-mx-w767-mg-t10">
+				<button class="btn btn-success w100" @click="getBookList();">검색</button>
+			</div>
+		</div>
+        <div>
+            <div class="pd5">
+                <div class="cf mg-b5">
+                    <div class="float-l">
+						<span class="inline-block w30 pd5">
+							<input id="bookWithoutAuthorCdeAllChk" type="checkbox" class="MG0 w20 h20">
+						</span>
+                        <button class="btn btn-success" @click="openAuthorCodePopup();">청구번호출력</button>
+                        <button class="btn btn-danger" @click="deleteBooks();">선택삭제</button>
+						<button id="regBook_hiddenRefreshBtn" class="btn btn-default none"
+						@click="getBooksWithoutAuthorCde()">reFresh</button> 
+                    </div>
+                    <div class="float-r pd-t17">
+                        <span id="regBook_WithoutAuthorCdeLen" class="font-w900">{{BooksWithoutAuthorCde.length}}</span>건
+                    </div>
+                </div>
+				<div id="regBook_BookWithoutAuthorCdeList" class="border-t-ccc overflow-y-auto">
+					<div class="border-b-ccc pd5 cf" v-for="(book, idx) in BooksWithoutAuthorCde">
+						<div class="float-l w30">
+							<input type="checkbox" class="MG0 w20 h20" data-name="bookWithoutAuthorCde"
+							:data-author-code="book.authorCde" :data-book-cde="book.bookCde"
+							:data-claim-no="book.claimNo" :data-class-no="book.classNo">
+						</div>
+						<div class="float-l w100p-30" @click="getBookInfo(book.bookCde);">
+							<div class="cf">
+								<div class="float-l w70p txt-ellipsis" :title="book.title"><span>{{book.title}}</span></div>
+								<div class="float-r w30p txt-r txt-ellipsis" :title="book.authorInfo"><span>{{book.authorInfo}}</span></div>
+							</div>
+							<div class="cf">
+								<div class="float-l"><strong>{{book.bookCde}}</strong></div>
+								<div class="float-r"><strong>{{book.authorCde}}</strong></div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

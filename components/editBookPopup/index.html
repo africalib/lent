@@ -1,0 +1,126 @@
+<div class="pd10">
+	<div class="mg-b10 txt-r" v-if="!bookInfo.returnDt">
+		<button class="btn btn-warning" v-if="!isEdit" @click="isEdit = true;">수정</button>
+		<span v-if="isEdit">
+			<button class="btn btn-success" @click="editBook();">저장</button>
+			<button class="btn btn-default" @click="isEdit = false;">취소</button>
+		</span>
+		<button class="btn btn-danger" @click="deleteBook();">삭제</button>
+	</div>
+	<div id="popup_bookInfo" class="pd5">
+		<div class="mg-b5 cf">
+			<label class="mg0 float-l">
+				<span class="v-middle w70 inline-block txt-r">ISBN:</span>
+				<input type="text" v-model="bookInfo.isbn2" class="form-control inline-block w261 h24" :readonly="!isEdit">
+			</label>
+			<label class="mg0 float-r">
+				<span class="v-middle w70 inline-block txt-r">총서명:</span>
+				<input type="text" v-model="bookInfo.seriesTitle" class="form-control inline-block w261 h24"
+				:readonly="!isEdit" :title="!isEdit ? bookInfo.seriesTitle : ''">
+			</label>
+		</div>
+		<div class="mg-b5">
+			<div class="mg-b5 cf">
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r color-red">*서명:</span>
+					<input type="text" v-model="bookInfo.title" class="form-control inline-block w261 h24"
+					:readonly="!isEdit" :title="!isEdit ? bookInfo.title : ''">
+				</label>
+				<label class="mg0 float-r">
+					<span class="v-middle w70 inline-block txt-r color-red">*저자:</span>
+					<input type="text" v-model="bookInfo.authorInfo" class="form-control inline-block w127 h24"
+					:readonly="!isEdit" :title="!isEdit ? bookInfo.authorInfo : ''">
+				</label>
+				<label class="mg0 float-r">
+					<span class="v-middle w70 inline-block txt-r color-bbb">서명권차:</span>
+					<input type="text" class="form-control inline-block w60 h24" disabled>
+				</label>
+			</div>
+			<div class="mg-b5 cf">
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r">출판사:</span>
+					<input type="text" v-model="bookInfo.pubInfo" class="form-control inline-block w127 h24"
+					:readonly="!isEdit" :title="!isEdit ? bookInfo.pubInfo : ''">
+				</label>
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r">출판년도:</span>
+					<input type="text" v-model="bookInfo.pubYearInfo" class="form-control inline-block w60 h24" :readonly="!isEdit">
+				</label>
+				<label class="mg0 float-r">
+					<span class="v-middle w70 inline-block txt-r color-red">*분류기호:</span>
+					<input type="text" v-model="bookInfo.classNo" class="form-control inline-block w127 h24" :readonly="!isEdit">
+				</label>
+				<label class="mg0 float-r">
+					<span class="v-middle w70 inline-block txt-r">청구권차:</span>
+					<input type="text" class="form-control inline-block w60 h24" v-model="bookInfo.claimNo" :readonly="!isEdit">
+				</label>
+			</div>
+			<div class="mg-b5 cf">
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r color-red">*저자기호:</span>
+					<input type="text" v-model="bookInfo.authorCde" class="form-control inline-block w127 h24" :readonly="!isEdit">
+				</label>
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r color-red">*등록번호:</span>
+					<input type="text" v-model="bookInfo.bookCde" class="form-control inline-block w194 h24" :readonly="!isEdit">
+				</label>
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r">복본:</span>
+					<input type="text" class="form-control inline-block w127 h24" v-model="bookInfo.copyNo" :readonly="!isEdit">
+				</label>
+			</div>
+			<div class="cf">
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r color-red">딸림자료:</span>
+					<input type="text" v-model="bookInfo.withThings" class="form-control inline-block w261 h24" :readonly="!isEdit">
+				</label>
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r">도서상태:</span>
+					<select class="form-control inline-block w60 h24 pd0" v-model="bookInfo.bookSts" :disabled="!isEdit">
+						<option value="rent">대출</option>
+						<option value="readOnly">열람</option>
+						<option value="hold">보류</option>
+					</select>
+				</label>
+			</div>
+		</div>
+    </div>
+	<div id="popup_bookInfo_memberList" class="border-ccc pd5" v-if="bookInfo.authorCdeChk == 'y'">
+		<div class="cf">
+			<div class="float-l">
+				<label class="radio-btn"><input type="radio" v-model="listType" value="all" @change="getMemberListByType();"><span>전체</span></label>
+				<label class="radio-btn"><input type="radio" v-model="listType" value="lastMonth" @change="getMemberListByType();"><span>최근한달</span></label>
+				<label class="radio-btn"><input type="radio" v-model="listType" value="overdueReturn" @change="getMemberListByType();"><span>연체반납</span></label>
+			</div>
+			<div class="float-r pd-t17">
+				<strong>{{memberList.length}}건</strong>
+			</div>
+		</div>
+		<!-- <hr class="mg-v5"> -->
+		<div class="mx-h250 overflow-y-auto border-t-ccc">
+			<div class="border-b-ccc pd5" v-for="(mbr, idx) in memberList">
+				<div class="cf">
+					<div class="float-l w100p-80 txt-overflow">
+						<span>{{mbr.mbrNm}} [{{mbr.mbrCde}}] <span v-if="mbr.mbrId">[{{mbr.mbrId}}]</span></span>
+					</div>
+					<div class="float-r w80 txt-r">
+						<strong v-if="mbr.returnDt" :class="mbr.isOverdue == 'y' ? 'color-orange' : 'color-5ecf5e'">
+							{{mbr.isOverdue == 'y' ? '연체반납' : '반납'}}
+						</strong>
+						<strong v-else :class="mbr.today >= mbr.libRentBookReturnDt ? 'color-red' : ''">
+							{{mbr.today >= mbr.libRentBookReturnDt ? '연체중' : '대여중'}}
+						</strong>
+					</div>
+				</div>
+				<div class="font1_2rem cf">
+					<div class="float-l w100p-140 txt-overflow">
+						<span>{{mbr.mbrTel}}</span>
+					</div>
+					<div class="float-r w140 txt-r" :class="{'color-red': mbr.libRentBookReturnDt && mbr.today > mbr.libRentBookReturnDt}">
+						<strong>{{mbr.rentDt}} ~ {{mbr.returnDt}}</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

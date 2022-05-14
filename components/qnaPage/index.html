@@ -1,0 +1,55 @@
+<section id="qnaPage" class="">
+    <div class="container pd-b10 pd-t20">
+		<h2>묻고답하기</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+        <div class="txt-r mg-b5 cf">
+			<div class="float-l">
+				<button class="btn btn-default" @click="$root.headToPage('qna-list-page');">
+					<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+				</button>
+			</div>
+			<div class="float-r">
+				<button class="btn btn-success" v-if="mode === 'new'" @click="reg_qna();">등록</button>
+				<button class="btn btn-warning" v-if="mode === 'edit' && editable !== true"
+				@click="editable = true; summerNoteOnOff(true);">
+					<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+				</button>
+				<button class="btn btn-warning" v-if="mode === 'edit' && editable" @click="edit_qna();">수정</button>
+				<button class="btn btn-default" v-if="mode === 'edit' && editable"
+				@click="mode = 'edit'; editable = false; summerNoteOnOff(false);">취소</button>
+				<button class="btn btn-danger" v-if="mode === 'edit'" @click="delete_qna();">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+				</button>
+			</div>
+        </div>
+        <div class="cf mg-h-5 mg-b5">
+            <div class="pd-h5">
+                <!-- <input type="text" class="form-control" placeholder="제목" > -->
+				<label class="input-style1 w100p mg-b0 color-51b651">
+					<input type="text" id="qnaPage_title" placeholder=" " :disabled="mode !== 'new' && !editable" v-model="boardInfo.title">
+					<span class="color-000">제목</span>
+				</label>
+            </div>
+        </div>
+		<textarea id="summernote" name="editordata"></textarea>
+		<div class="border-t-ccc mg-b10">
+			<div class="border-b-ccc" v-for="coment in boardInfo.coments">
+				<div class="cf pd-t3">
+					<div class="float-l">{{coment.regId}}</div>
+					<div class="float-r" v-if="$root.userInfo.mbrId == coment.regId">
+						<button class="btn btn-danger pd-v3-h6" @click="deleteComent(coment.comentSeq);">삭제</button>
+					</div>
+				</div>
+				<div>{{coment.content}}</div>
+				<div>{{coment.regDt}}</div>
+			</div>
+		</div>
+		<div v-if="mode !== 'new'">
+			<label class="input-style1 w100p mg-b0 color-51b651">
+				<input type="text" id="qnaPage_coment" placeholder=" " class="W100P-74">
+				<span class="color-000">댓글</span>
+				<button class="btn btn-success v-top pd-v3-h6 mg-t1" @click="regComent();">댓글달기</button>
+			</label>
+		</div>
+    </div>
+</section>

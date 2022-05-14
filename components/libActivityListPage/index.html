@@ -1,0 +1,42 @@
+<section id="libActivityListPage" class="">
+    <div class="container pd-b10 pd-t20">
+		<div class="cf">
+			<h2 class="float-l media-mx-w767-mg-t0">도서관 활동</h2>
+			<div class="float-r pd-t20 media-mx-w767-pd-t0">
+                <button class="btn btn-default radius0" @click="writtenManager('new');">글쓰기</button>
+            </div>
+		</div>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+		<div class="mg-b5">
+			<input type="text" id="libActivityListPage_kwd" class="w180 form-control inline-block radius0 font16 v-top" placeholder="키워드" @keyup.enter="getBoardList(10, 0);">
+			<button class="btn btn-success v-top radius0 w80 mg0auto" @click="getBoardList(10, 0);">검색</button>
+        </div>
+        <div class="border-t-ccc mg-b10">
+			<div class="border-b-ccc pd10 pointer cf" v-for="(activity, idx) in boardList.boardList"
+			@click="writtenManager('view', activity.seq, activity.title, activity.content, activity.regId);">
+				<div class="float-l w30 txt-c media-mx-w767-pd-t10">
+					{{boardList.totalBoardCnt - (boardList.offset * 10) - idx}}
+				</div>
+				<div class="float-r w100p-30">
+					<div class="float-l txt-overflow w100p-280 media-mx-w767-w100p">
+						<span>{{activity.type}}</span>
+						<span>{{activity.title}}</span>
+						<span class="radius20 color-fff bg-3758e3 pd-v3-h6 font10" v-if="activity.comentCnt > 0">댓글 {{activity.comentCnt}}+</span>
+					</div>
+					<div class="float-r txt-overflow w280 txt-r media-mx-w767-w100p media-mx-w767-txt-l">
+						{{activity.regId}} <span class="mg-h3">|</span> {{activity.regDt}}
+					</div>
+				</div>
+			</div>
+        </div>
+		
+		<div id="libActivityListPage_pagingBox" v-if="paging.pageCnt > 1" class="txt-c">
+			<button class="btn btn-light" @click="changePageGroup(-1);">&lt;</button>
+			<button class="btn btn-light mg-h3 page-idx" v-for="idx in paging.pageCnt"
+			v-if="(paging.pageGroupOffset * paging.limitPageCnt) < idx &&
+			idx <= ((paging.pageGroupOffset * paging.limitPageCnt) + paging.limitPageCnt)"
+			@click="getBoardList(10, (idx - 1));">{{idx}}</button>
+			<button class="btn btn-light" @click="changePageGroup(1);">&gt;</button>
+		</div>
+    </div>
+</section>

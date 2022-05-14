@@ -1,0 +1,32 @@
+<section id="requestBookPage" class="">
+    <div class="container pd-b10 pd-t20">
+		<h2>도서요청</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+        <!-- <div class="txt-r mg-b10"> -->
+            <!-- <button class="btn btn-warning" v-if="mode === 'edit'" @click="editable = true">수정</button> -->
+            <!-- <button class="btn btn-danger" v-if="mode === 'edit'" @click="delete_boardBook();">삭제</button> -->
+            <!-- <button class="btn btn-default" @click="$parent.viewPage = 'requestList'">리스트</button> -->
+        <!-- </div> -->
+		<div class="txt-r mg-b5 cf">
+			<div class="float-l">
+				<button class="btn btn-default radius0" @click="$root.headToPage('request-book-list-page');">리스트</button>
+			</div>
+			<div class="float-r">
+				<button class="btn btn-success radius0" v-if="mode === 'new'" @click="reg_board();">등록</button>
+				<button class="btn btn-warning radius0" v-if="mode === 'edit' && editable !== true"
+				@click="editable = true; summerNoteOnOff(true);">수정</button>
+				<button class="btn btn-success radius0" v-if="mode === 'edit' && editable" @click="edit_board();">저장</button>
+				<button class="btn btn-default radius0" v-if="mode === 'edit' && editable"
+				@click="mode = 'edit'; editable = false; summerNoteOnOff(false);">취소</button>
+				<button class="btn btn-danger radius0" v-if="mode === 'edit'" @click="delete_board();">삭제</button>
+			</div>
+        </div>
+		<div class="cf mg-h-5 mg-b5">
+            <div class="pd-h5">
+				<input type="text" id="requestBookPage_title" placeholder="제목" class="w100p form-control inline-block radius0 font16 v-top"
+				:disabled="mode !== 'new' && !editable" v-model="boardInfo.title">
+            </div>
+        </div>
+		<textarea id="summernote" name="editordata"></textarea>
+    </div>
+</section>

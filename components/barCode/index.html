@@ -1,0 +1,83 @@
+<div class="pd10">
+    <div class="cf mg-h-5 mg-b10">
+        <div class="mg-b5">
+            <strong class="mg-r10 inline-block w80 txt-r">라벨크기</strong>
+            <input id="barcode_labelWidth" type="number" class="form-control inline-block w50 no-btn txt-r" value="50">
+			<span class="inline-block">mm</span>
+            <span class="inline-block mg-h5"> * </span>
+            <input id="barcode_labelHeight" type="number" class="form-control inline-block w50 no-btn txt-r" value="30">
+			<span class="inline-block">mm</span>
+        </div>
+        <!-- <div class="mg-b5"> -->
+            <!-- <strong class="mg-r10 inline-block w80 txt-r">외곽선</strong> -->
+            <!-- <label> -->
+                <!-- <input type="radio" value="y" name="barcode_labelBorder"> -->
+                <!-- <span class="v-middle">있음</span> -->
+            <!-- </label> -->
+            <!-- <label> -->
+                <!-- <input type="radio" vaule="n" name="barcode_labelBorder"> -->
+                <!-- <span class="v-middle">없음</span> -->
+            <!-- </label> -->
+        <!-- </div> -->
+        <div class="mg-b5">
+            <strong class="inline-block mg-r10 v-middle txt-c w80">여백<br>(가로 * 세로)</strong>
+            <input type="number" id="barcode_paddingLeft" class="form-control inline-block w50 no-btn txt-r" value="2">
+            <span class="inline-block">mm</span>
+            <span class="inline-block mg-h5"> * </span>
+            <input type="number" id="barcode_paddingTop" class="form-control inline-block w50 no-btn txt-r" value="30">
+            <span class="inline-block">mm</span>
+        </div>
+        <div class="mg-b5">
+            <label class="mg0">
+                <span class="v-middle w80 inline-block mg-r10 txt-r">도서관명</span>
+                <input type="text" id="barcode_libNm" class="form-control inline-block w206" value="그루터기 작은도서관">
+            </label>
+        </div>
+        <div class="mg-b5">
+            <label class="mg0">
+                <span class="v-middle w80 inline-block mg-r10 txt-r">도서관명<br>글자크기</span>
+                <input type="text" id="barcode_libNmFontSize" class="form-control inline-block w50 txt-r" value="14">
+                <span class="v-middle">px</span>
+            </label>
+        </div>
+        <!-- <div class="mg-b5"> -->
+            <!-- <label class="mg0 mg-r10 w80 txt-r"> -->
+                <!-- <input type="checkbox"> -->
+                <!-- <span>비고</span> -->
+            <!-- </label> -->
+            <!-- <input type="text" id="barcode_addingWord" class="form-control inline-block w206"> -->
+        <!-- </div> -->
+		<div class="border-ccc w300 pd10 mg-b5">
+			<div class="border-b-ccc mg-b5">
+				<label class="radio-btn pointer"><input type="radio" name="barcodeType" v-model="barcodeType" value="orderBarcode" checked><span>순차바코드</span></label>
+				<label class="radio-btn pointer"><input type="radio" name="barcodeType" v-model="barcodeType" value="customBarcode"><span>입력바코드</span></label>
+			</div>
+			<div v-if="barcodeType == 'orderBarcode'">
+				<div class="cf mg-b5">
+					<div class="float-l w30p pd5 txt-c">
+						<span class="font12">구분기호</span>
+						<input type="text" id="barcode_prfOrder" class="form-control txt-c" value="EM" />
+					</div>
+					<div class="float-l w70p pd5 txt-c">
+						<span class="font12">바코드번호</span>
+						<input type="text" id="barcode_sufOrder" class="form-control txt-c" v-model="orderedBarcode"/>
+					</div>
+				</div>
+			</div>
+			<div v-else-if="barcodeType == 'customBarcode'">
+				준비중
+			</div>
+		</div>
+		<div class="mg-b5">
+            <label class="mg0">
+                <span class="v-middle w80 inline-block mg-r10 txt-r">인쇄장수</span>
+                <input type="text" id="barcode_labelCnt" class="form-control inline-block w50 txt-r" value="21">
+                <span class="v-middle font12">(출력할 바코드 갯수)</span>
+            </label>
+        </div>
+		
+        <div>
+            <button class="btn btn-primary" @click="openBarcodePopup();">바코드창 열기</button>
+        </div>
+    </div>
+</div>

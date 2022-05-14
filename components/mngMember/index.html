@@ -1,0 +1,92 @@
+<div class="pd10">
+    <div id="mbrSrchSection" class="cf mg-h-5 mg-b10">
+        <div class="float-l w120 pd-h5">
+            <select id="memberRange" class="form-control" name="sort" v-model="memberRange">
+                <option value="all">전체</option>
+                <option value="y" selected>회원</option>
+                <option value="n">가입승인</option>
+            </select>
+        </div>
+        <div class="float-l w120 pd-h5">
+            <select class="form-control" name="srchType">
+                <option value="all">통합검색</option>
+                <option value="mbr_nm">이름</option>
+                <option value="mbr_tel">전화번호</option>
+                <option v-if="memberRange === 'all' || memberRange === 'y'" value="mbr_cde">회원번호</option>
+            </select>
+        </div>
+        <div class="float-l w180 pd-h5">
+            <input type="text" id="mngMember_srchWrd" class="form-control" placeholder="" name="srchWrd" @keyup.enter="searchMember();">
+        </div>
+        <div class="float-l pd-h5 txt-c media-mx-w767-w100p media-mx-w767-mg-t10">
+            <button class="btn btn-success w100" @click="searchMember();">검색</button>
+        </div>
+    </div>
+    <div class="mg-b5 cf">
+		<div class="float-l">
+			<button class="btn btn-success" @click="$root.openPopup('signUp', '회원가입', 406);">회원가입</button>
+			<!-- <button class="btn btn-warning" v-if="memberRange !== 'n'">회원설정</button> -->
+			<button class="btn btn-danger" v-if="memberRange !== 'n'" @click="deleteMember()">회원탈퇴</button>
+			<!-- <button class="btn btn-info" v-if="memberRange !== 'y'">가입승인</button> -->
+			<!-- <button class="btn btn-danger" v-if="memberRange !== 'y'">가입거절</button> -->
+		</div>
+    </div>
+	<div class="cf">
+		<div class="float-l" v-if="memberRange != 'n'">
+			<label class="radio-btn"><input type="radio" v-model="listType" value="all" @change="searchMember();"><span>전체</span></label>
+			<label class="radio-btn"><input type="radio" v-model="listType" value="rent" @change="searchMember();"><span>대여중</span></label>
+			<label class="radio-btn"><input type="radio" v-model="listType" value="overdue" @change="searchMember();"><span>연체중</span></label>
+		</div>
+		<div class="float-r txt-r pd-t17">
+			<strong>{{memberList.length}}건</strong>
+		</div>
+	</div>
+    <div id="mngMember_memberList" class="border-t-ccc overflow-y-auto">
+		<div class="border-b-ccc pd5 cf h68" v-for="(mbr, idx) in memberList">
+			<div class="float-l w30 h100p">
+				<input type="checkbox" class="vertical-m MG0 w20 h20" name="chkMbrSeq" :value="mbr.mbrSeq">
+			</div>
+			<div class="float-l w100p-210 h100p" @click="getMemberInfo(mbr.mbrSeq);">
+				<div class="cf">
+					<div class="float-l">
+						<span>{{mbr.mbrNm}}</span>
+						<span v-if="mbr.approvalYn === 'y'">[{{mbr.mbrCde}}]</span>
+						<span v-if="mbr.mbrId">[{{mbr.mbrId}}]</span>
+					</div>
+				</div>
+				<div class="font1rem" v-if="mbr.approvalYn === 'y'">{{mbr.mbrTel}}</div>
+				<div v-if="mbr.approvalYn !== 'y'">
+					<div class="font1rem mg-b5"><span>{{mbr.mbrBirth}}</span> <strong class="radius20 color-fff bg-3758e3 pd-v3-h6">{{mbr.mbrGender}}</strong></div>
+					<div class="font1rem">{{mbr.mbrAddress}}</div>
+				</div>
+				<div class="cf mg-t5 font12" v-if="mbr.approvalYn === 'y'">
+					<div class="float-l">
+						<!-- <strong class="radius20 color-fff bg-5ecf5e pd-v3-h6">대여중</strong> -->
+						<strong class="radius20 color-fff pd-v3-h6 v-top blink-bg-red-1s"
+						v-if="mbr.rentOverdueBookCnt && mbr.rentOverdueBookCnt > 0">연체중</strong>
+					</div>
+				</div>
+			</div>
+			<div class="float-l w180 txt-r h100p">
+				<div class="vertical-m">
+					<div v-if="mbr.approvalYn === 'y'">
+						<div :class="{'color-red': mbr.rentBookCnt ==  mbr.mbrMxCnt}">
+							<span>대여현황: <strong>{{mbr.rentBookCnt}} / {{mbr.mbrMxCnt}}</strong></span>
+						</div>
+						<div class="mg-t5">
+							<!-- <button class="btn btn-warning pd-v3-h6">회원설정</button> -->
+							<button class="btn btn-danger pd-v3-h6" @click="deleteMember(mbr.mbrSeq)">회원탈퇴</button>
+						</div>
+					</div>
+					<div v-if="mbr.approvalYn !== 'y'">
+						<div><span>{{mbr.mbrTel}}</span></div>
+						<div class="mg-t5">
+							<button class="btn btn-info pd-v3-h6" @click="approveMember(mbr.mbrSeq);">가입승인</button>
+							<button class="btn btn-danger pd-v3-h6">가입거절</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

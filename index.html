@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="w100p">
+<head>
+	<meta charset="UTF-8">
+	<title>그루터기 작은 도서관</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="description" content="서울시 은평구 응암동에 위치한 그루터기작은도서관입니다.">
+	<meta name="keywords" content="그루터기작은도서관, 은평구, 응암동">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="그루터기작은도서관">
+	<meta property="og:description" content="서울시 은평구 응암동에 위치한 그루터기작은도서관입니다.">
+	<meta property="og:image" content="http://lent.or.kr/assets/img/logo_full_000.svg">
+	<meta property="og:url" content="http://lent.or.kr/">
+	<meta property="twitter:url" content="http://lent.or.kr/">
+	<meta property="twitter:image" content="http://lent.or.kr/assets/img/logo_full_000.svg">
+	<meta property="twitter:card" content="summary">
+	<meta property="twitter:title" content="그루터기작은도서관">
+	<meta property="twitter:description" content="서울시 은평구 응암동에 위치한 그루터기작은도서관입니다.">
+	
+	<link rel="canonical" href="http://lent.or.kr/">
+	<!-- <link rel="stylesheet" href="assets/css/bootstrap.min.css" /> -->
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" href="assets/fonts/fonts.css" />
+	<link rel="stylesheet" href="assets/css/swiper.min.css" />
+	<link rel="stylesheet" href="assets/css/layout.css" />
+	<link rel="stylesheet" href="style.css" />
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+</head>
+
+<body class="w100p">
+	<div id="mainWrapper" class="w100p h100p mg-b200 bg-fff">
+		<header class="fixed top0 left0 w100p bg-fff z-idx3 h125 media-mx-w767-h50" style="box-shadow:0 1px 8px #999;">
+			<div class="container h125 media-mx-w767-h50 txt-c relative media-mx-w767-txt-l">
+				<h1 class="inline-block h75 line-h75px mg0 font3rem pointer font-fam03" @click="headToPage('home'); menuControl(false);">
+					<img src="assets/img/logo_full_000.svg" class="v-top mg-t10 h55 media-mx-w767-h40 media-mx-w767-mg-t5">
+				</h1>
+				<div class="absolute right0 top10 media-mx-w767-none" v-if="!userInfo.mbrSeq">
+					<strong class="inline-block v-top w90 mg0auto pointer" @click="headToPage('sign-in-page'); menuControl(false);">로그인</strong>
+					<strong class="inline-block v-top w90 mg0auto pointer" @click="headToPage('select-sign-up-page'); menuControl(false);">회원가입</strong>
+				</div>
+				<div class="absolute right0 top10 media-mx-w767-none" v-cloak v-else="userInfo.mbrSeq">
+					<span class="font2rem">{{userInfo.mbrNm}}</span>님
+					<!-- <button class="btn btn-default mg-t-6">설정</button> -->
+					<button class="btn btn-danger v-middle radius0 w80 mg0auto mg-t-6" @click="userInfo = {};">로그아웃</button>
+				</div>
+				<div class="absolute top0 right15 none media-mx-w767-block">
+					<!-- <span><img src="assets/img/lib-menu-icon.svg" width="40" class="mg-t5" @click="menuControl();"></span> -->
+					<span>
+						<img src="assets/img/033-stack.svg" height="50" @click="menuControl();">
+						<!-- <div>Icons made by -->
+						<!-- <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from -->
+						<!-- <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+						<!-- </div> -->
+					</span>
+				</div>
+				<div class="h50 media-mx-w767-h0 relative z-idx1">
+					<nav id="mainMenu" style="transition:right .5s;"
+					class="mg0auto media-mx-w767-w200 media-mx-w767-fixed media-mx-w767-top50
+					media-mx-w767-bottom0 media-mx-w767-bg-fff media-mx-w767-right-200">
+						<ul class="list-style-none cf mg0auto pd0 w700 media-mx-w767-color-000 txt-c media-mx-w767-overflow-y-auto media-mx-w767-mx-h100p media-mx-w767-w100p">
+							<li class="w200 txt-c pointer none
+							media-mx-w767-block media-mx-w767-border-b-eee media-mx-w767-h-auto menu-hover">
+								<span class="block h50 line-h50px" v-if="!userInfo.mbrCde">
+									<button class="btn btn-default w90 radius0" @click="headToPage('sign-in-page'); menuControl(false);">로그인</button>
+									<button class="btn btn-default w90 radius0" @click="headToPage('select-sign-up-page'); menuControl(false);">회원가입</button>
+								</span>
+								<span class="block h75" v-else="!userInfo.mbrCde" v-cloak>
+									<span class="block mg-b3"><span class="font2rem">{{userInfo.mbrNm}}</span>님</span>
+									<span>
+										<button class="btn btn-default v-top radius0 w80 mg0auto" @click="menuControl(false);">설정</button>
+										<button class="btn btn-danger v-top radius0 w80 mg0auto" @click="userInfo = {}; menuControl(false);">로그아웃</button>
+									</span>
+								</span>
+							</li>
+							<li class="float-l v-top pointer w20p h50 line-h50px txt-c media-mx-w767-w100p media-mx-w767-border-b-eee media-mx-w767-h-auto menu-hover" @click="openSubMenu($event);" >
+								<span class="block h50 line-h50px font16"><strong>도서관정보</strong></span>
+								<ul class="submenu mp0 list-style-none color-000 none media-mx-w767-bg-ddd">
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('lib-info-page'); menuControl(false);">도서관소개</li>
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('manual-page'); menuControl(false);">이용안내</li>
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('way-to-come-page'); menuControl(false);">오시는길</li>
+								</ul>
+							</li>
+							<li class="float-l v-top pointer w20p h50 line-h50px txt-c media-mx-w767-w100p media-mx-w767-border-b-eee media-mx-w767-h-auto menu-hover" @click="openSubMenu($event);">
+								<span class="block h50 line-h50px font16"><strong>도서관련</strong></span>
+								<ul class="submenu mp0 list-style-none color-000 none media-mx-w767-bg-ddd">
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('search-book-page'); menuControl(false);">도서검색</li>
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('request-book-list-page'); menuControl(false);">도서신청</li>
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('new-book-page'); menuControl(false);">신간도서</li>
+								</ul>
+							</li>
+							<li class="float-l v-top pointer w20p h50 line-h50px txt-c media-mx-w767-w100p media-mx-w767-border-b-eee media-mx-w767-h-auto menu-hover" @click="openSubMenu($event);">
+								<span class="block h50 line-h50px font16"><strong>열린마당</strong></span>
+								<ul class="submenu mp0 list-style-none color-000 none media-mx-w767-bg-ddd">
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('notice-list-page'); menuControl(false);">공지사항</li>
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('suggest-list-page'); menuControl(false);">건의사항</li>
+									<!-- <li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('qna-list-page'); menuControl(false);">묻고답하기</li> -->
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('lib-activity-list-page'); menuControl(false);">도서관 활동</li>
+								</ul>
+							</li>
+							<li class="float-l v-top pointer w20p h50 line-h50px txt-c media-mx-w767-w100p media-mx-w767-border-b-eee media-mx-w767-h-auto menu-hover" @click="openSubMenu($event);">
+								<span class="block h50 line-h50px font16"><strong>나눔터</strong></span>
+								<ul class="submenu mp0 list-style-none color-000 none media-mx-w767-bg-ddd">
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('goods-sharing-list-page'); menuControl(false);">물품나눔</li>
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee hover-bg-039 hover-color-fff" @click="headToPage('talent-sharing-list-page'); menuControl(false);">재능나눔</li>
+									<li class="pointer media-mx-w767-float-none h50 line-h50px txt-c media-mx-w767-border-t-eee media-mx-w767-none hover-color-fff"></li>
+								</ul>
+							</li>
+							<li id="menu_libMng" class="float-l v-top pointer w20p h50 line-h50px txt-c media-mx-w767-w100p media-mx-w767-border-b-eee media-mx-w767-h-auto menu-hover"
+							v-if="version == 'pc'">
+								<span class="block h50 line-h50px font16" @click="mngLibControl();"><strong>도서관관리</strong></span>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div id="menuBg" class="h150 bg-fff relative none" style="background:#b6e3ff;"></div>
+			<!-- <div id="menuBg" class="h175 bg-fff relative top-50 none" style="background:#e2ffc5;"></div> -->
+		</header>
+		<div class="pd-t100 z-idx1 bg-fff relative min-h100vh media-mx-w767-pd-t50" style="box-shadow:0 1px 3px #000;">
+			
+			<template v-if="viewPage">
+				<component v-bind:is="viewPage"></component>
+			</template>
+			<template v-else>
+				<home></home>
+			</template>
+			
+			<!-- <lib-info-page v-else-if="viewPage === 'libInfo'"></lib-info-page> -->
+			
+			<!-- <manual-page v-else-if="viewPage === 'manual'"></manual-page> -->
+			<!-- <way-to-come-page v-else-if="viewPage === 'way'"></way-to-come-page> -->
+
+			<!-- <search-book-page v-else-if="viewPage === 'search'"></search-book-page> -->
+			<!-- <request-book-list-page v-else-if="viewPage === 'requestList'"></request-book-list-page> -->
+			<!-- <request-book-page v-else-if="viewPage === 'request'"></request-book-page> -->
+			<!-- <new-book-page v-else-if="viewPage === 'new'"></new-book-page> -->
+
+			<!-- <notice-list-page v-else-if="viewPage === 'noticeList'"></notice-list-page> -->
+			<!-- <notice-page v-else-if="viewPage === 'notice'"></notice-page> -->
+			<!-- <suggest-list-page v-else-if="viewPage === 'suggestList'"></suggest-list-page> -->
+			<!-- <suggest-page v-else-if="viewPage === 'suggest'"></suggest-page> -->
+			<!-- <qna-list-page v-else-if="viewPage === 'qnaList'"></qna-list-page> -->
+			<!-- <qna-page v-else-if="viewPage === 'qna'"></qna-page> -->
+
+			<!-- <donation-page v-else-if="viewPage === 'donation'"></donation-page> -->
+			
+			<!-- <chart-page v-else-if="viewPage === 'chart'"></chart-page> -->
+			<!-- <select-sign-up-page v-else-if="viewPage === 'selectSignUp'"></select-sign-up-page> -->
+			<!-- <reg-id-page v-else-if="viewPage === 'regId'"></reg-id-page> -->
+			<!-- <sign-in-page v-else-if="viewPage === 'signIn'"></sign-in-page> -->
+			<!-- <sign-up-page v-else-if="viewPage === 'signUp'"></sign-up-page> -->
+			<!-- <lib-mng-page v-else-if="viewPage === 'mng'"></lib-mng-page> -->
+			<!-- <hidden-page v-else-if="viewPage === 'hidden'"></hidden-page> -->
+		</div>
+		<footer class="w100p h200 bottom0 fixed bg-999">
+			<div class="container pd-v20">
+				© 그루터기작은 도서관 2021   |   070-8779-1340   |   서울 은평구 은평로10길 17
+			</div>
+		</footer>
+		<div id="dimLayer" class="fixed top50 bottom0 left0 right0 bg-000-0_5 z-idx2 none"
+		:class="{'BLOCK': popup.name !== null}" v-if="popup.name !== null" @click="menuControl(false);">
+			
+			<!-- <div id="popup2" class="absolute top50p left50p bg-fff translate-50p inline-block" v-if="popup2 !== null">
+				<header class="cf pd10 bg-51b651 color-fff">
+					<div id="popup1title" class="float-l">회원설정</div>
+					<div class="float-r"><span class="glyphicon glyphicon-remove pointer" aria-hidden="true" @click="popup2 = null"></span></div>
+				</header>
+				<member-info-popup v-if="popup2 === 'memberInfo'"></member-info-popup>
+			</div> -->
+		</div>
+		<div id="popup1" class="fixed top50p left50p bg-fff translate-50p inline-block z-idx3" v-cloak
+		style="box-shadow:0 0 8px #000;" :style="{width: popup.width + 'px'}"
+		v-if="popup.name !== null && popup.name !== 'menu'">
+			<header class="cf pd10 bg-51b651 color-fff">
+				<div id="popup1title" class="float-l">{{popup.title}}</div>
+				<div class="float-r"><span class="glyphicon glyphicon-remove pointer" aria-hidden="true" @click="closePopup();"></span></div>
+			</header>
+			<book-list-popup v-if="popup.name === 'bookList'"></book-list-popup>
+			<book-list-from-print-call-no-popup v-if="popup.name === 'bookListFromPrintCallNo'"></book-list-from-print-call-no-popup>
+			<edit-book-popup v-if="popup.name === 'editBook'"></edit-book-popup>
+			<member-info-popup v-if="popup.name === 'memberInfo'"></member-info-popup>
+			<member-list-popup v-if="popup.name === 'memberList'"></member-list-popup>
+			<sign-up-popup v-if="popup.name === 'signUp'"></sign-up-popup>
+		</div>
+		
+		
+		
+		<!-- <div class="popups"> -->
+			<!-- <div class="popup" v-for="(p, idx) in popupByAd" :style="{marginLeft:idx * 100 + 'px'}" v-if="p.visible"> -->
+				<!-- <div class="content">{{ p.imgUrl }}</div> -->
+				<!-- <div class="bottom">  -->
+					<!-- <div class="left" @click="closePopupByAd(p.imgUrl, true)">NO MORE</div> -->
+					<!-- <div class="right" @click="closePopupByAd(idx)">CLOSE</div> -->
+				<!-- </div> -->
+			<!-- </div> -->
+		<!-- </div> -->
+		
+		
+		
+	</div>
+	<script src="assets/js/vue.js"></script>
+	<script src="assets/js/swiper.min.js"></script>
+	<script src="assets/js/jquery-3.4.1.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<!-- <script src="assets/js/jquery.cookie-1.4.1.min.js"></script> -->
+	
+	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.cookie.js"></script>
+	
+	<!--카카오...-->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b6691f5b4dbdcbd62705c405dc431b0"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b6691f5b4dbdcbd62705c405dc431b0&libraries=LIBRARY"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b6691f5b4dbdcbd62705c405dc431b0&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b6691f5b4dbdcbd62705c405dc431b0&libraries=services,clusterer,drawing"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	
+	<script src="codeAboutBook.js"></script>
+	<script src="common.js"></script>
+
+
+	<!-- <script src="components/sample/script.js"></script> -->
+	<script src="components/home/script.js"></script>
+	
+	<script src="components/libInfoPage/script.js"></script>
+	<script src="components/manualPage/script.js"></script>
+	<script src="components/wayToComePage/script.js"></script>
+	<script src="components/wayToComePage/script.js"></script>
+	
+	<script src="components/searchBookPage/script.js"></script>
+	<script src="components/requestBookListPage/script.js"></script>
+	<script src="components/requestBookPage/script.js"></script>
+	<script src="components/newBookPage/script.js"></script>
+
+	<script src="components/noticeListPage/script.js"></script>
+	<script src="components/noticePage/script.js"></script>
+	<script src="components/suggestListPage/script.js"></script>
+	<script src="components/suggestPage/script.js"></script>
+	<script src="components/libActivityListPage/script.js"></script>
+	<script src="components/libActivityPage/script.js"></script>
+
+	<script src="components/goodsSharingListPage/script.js"></script>
+	<script src="components/goodsSharingPage/script.js"></script>
+	<script src="components/talentSharingListPage/script.js"></script>
+	<script src="components/talentSharingPage/script.js"></script>
+
+	<script src="components/chartPage/script.js"></script>
+	<script src="components/selectSignUpPage/script.js"></script>
+	<script src="components/regIdPage/script.js"></script>
+	<script src="components/signInPage/script.js"></script>
+	<script src="components/signUpPage/script.js"></script>
+	<script src="components/libMngPage/script.js"></script>
+	<script src="components/hiddenPage/script.js"></script>
+
+	<script src="components/bookListPopup/script.js"></script>
+	<script src="components/bookListFromPrintCallNoPopup/script.js"></script>
+	<script src="components/editBookPopup/script.js"></script>
+	<script src="components/memberInfoPopup/script.js"></script>
+	<script src="components/memberListPopup/script.js"></script>
+	<script src="components/signUpPopup/script.js"></script>
+
+	<script src="components/regBook/script.js"></script>
+	<script src="components/mngBook/script.js"></script>
+	<script src="components/takeOutBook/script.js"></script>
+	<script src="components/returnOfBook/script.js"></script>
+	<script src="components/mngMember/script.js"></script>
+	<script src="components/barCode/script.js"></script>
+	<script src="components/printCallNo/script.js"></script>
+	
+	<script src="script.js"></script>
+	<script>
+	</script>
+</body>
+
+</html>

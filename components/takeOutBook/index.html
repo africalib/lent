@@ -1,0 +1,109 @@
+<div class="pd10">
+    <div class="mg-h-5 mg-b10">
+        <!-- <div class="float-l w180 mg-r10"> -->
+            <!-- <input type="text" id="takeOutBook_memberKwd" class="form-control" @keyup.enter="getMemberListWithPopup();"> -->
+        <!-- </div> -->
+        <!-- <div class="float-l"> -->
+            <!-- <button class="btn btn-success w100" @click="getMemberListWithPopup();">회원검색</button> -->
+        <!-- </div> -->
+		<label class="input-style1 mg-b0 color-51b651">
+			<input type="text" id="takeOutBook_memberKwd" class="W160" placeholder=" " @keyup.enter="getMemberListWithPopup();">
+			<span class="color-000">회원</span>
+			<button class="btn btn-success v-top pd-v3-h6 mg-t1 w80" @click="getMemberListWithPopup();">회원검색</button>
+		</label>
+    </div>
+    <h6>*회원에 관한 모든 것 검색 가능(회원명, 전화번호, 회원코드)</h6>
+    <div class="mg-b10">
+        <div class="border-v-ccc pd5 cf h93"
+            v-if="memberInfo.mbrNm != ''">
+            <div class="float-l w100p-100 h100p" @click="getMemberInfo(memberInfo.mbrCde);">
+                <div class="mg-b5">
+					<span>{{memberInfo.mbrNm}}</span>
+					<span>[{{memberInfo.mbrCde}}]</span>
+					<span v-if="memberInfo.mbrId">[{{memberInfo.mbrId}}]</span>
+                </div>
+				<div class="mg-b5">
+					<span>{{memberInfo.mbrTel}}</span>
+                </div>
+                <div class="font1rem mg-b5">
+					<span>{{memberInfo.mbrBirth}}</span>
+					<!-- <strong class="radius20 color-fff bg-3758e3 pd-v3-h6">{{memberInfo.mbrGender}}</strong> -->
+				</div>
+                <div class="font1rem">{{memberInfo.mbrAddress}}</div>
+            </div>
+            <div class="float-l w100 txt-r h100p">
+                <div class="vertical-m">
+                    <div :class="{'color-red': memberInfo.rentBookCnt ==  memberInfo.mbrMxCnt}">
+						<strong>대여현황: <span>{{memberInfo.rentBookCnt}} / {{memberInfo.mbrMxCnt}}</span></strong>
+					</div>
+                    <div class="mg-t5"><button class="btn btn-danger pd-v3-h6 w80" @click="memberInfo = {mbrNm: ''}">취소</button></div>
+                </div>
+            </div>
+        </div>
+        <h3 class="border-v-ccc mg0 h68 line-h68px txt-c color-red" v-else>
+            * 회원을 먼저 검색해주세요 *
+        </h3>
+    </div>
+    <div id="takeOutBook_bookInfo" class="mg-h-5 border-ccc pd10" v-if="memberInfo.mbrNm != ''">
+        <div>
+            <!-- <label class="mg0"> -->
+                <!-- <span class="v-middle">도서검색:</span> -->
+                <!-- <input type="text" id="takeOutBook_bookCde" class="form-control inline-block w180"  style="ime-mode:inactive;" -->
+				<!-- @keyup.enter="getBookInfo($event);"> -->
+            <!-- </label> -->
+			<label class="input-style1 mg-b0 color-51b651">
+				<input type="text" id="takeOutBook_bookCde" placeholder=" " @keyup.enter="getBookInfo($event);">
+				<span class="color-000">도서검색</span>
+			</label>
+        </div>
+        <div class="mg-t10" v-if="bookInfo.bookCde != ''">
+            <div class="border-b-ccc pd5">
+                <div class="cf">
+                    <div class="float-l">
+                        <!-- <span class="mg-r5 font1rem">[종교]</span> -->
+						<span>{{bookInfo.title}}</span>
+                    </div>
+                    <div class="float-r">
+                        <strong :class="{'color-5ecf5e': bookInfo.isRent == 0, 'color-red': bookInfo.isRent == 1}">
+							<span v-if="bookInfo.authorCdeChk == 'y'">
+								<span v-if="bookInfo.bookSts == 'rent'">{{bookInfo.isRent == 1 ? '대여불가능' : bookInfo.isRent == 0 ? '대여가능' : ''}}</span>
+								<span v-else-if="bookInfo.bookSts == 'readOnly'" class="color-red">Only 열람</span>
+								<span v-else-if="bookInfo.bookSts == 'hold'" class="color-ccc">보류</span>
+							</span>
+							<span v-if="bookInfo.authorCdeChk == 'n'" class="color-orange">
+								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+								<span>저자기호</span>
+							</span>
+						</strong>
+                    </div>
+                </div>
+                <div class="font1_2rem cf">
+                    <div class="float-l"><span>{{bookInfo.authorInfo}}</span> | <span>{{bookInfo.pubInfo}}</span></div>
+                </div>
+                <div class="cf mg-t5 font12" v-if="bookInfo.isRent == 0 && bookInfo.bookSts == 'rent' && bookInfo.authorCdeChk == 'y'">
+                    <div class="float-l">
+                        <!-- <label class="mg-r5"> -->
+                            <!-- <span class="v-middle">대여일:</span> -->
+                            <!-- <input type="date" class="form-control inline-block w150" v-model="today" readonly> -->
+                        <!-- </label> -->
+						<label class="input-style1 mg-r5 color-51b651">
+							<input type="date" placeholder=" " v-model="today" disabled>
+							<span>대여일</span>
+						</label>
+						<label class="input-style1 color-51b651">
+							<input type="date" placeholder=" " v-model="returnDay">
+							<span class="color-000">반납일</span>
+						</label>
+                        <!-- <label> -->
+                            <!-- <span class="v-middle">반납일:</span> -->
+                            <!-- <input type="date" class="form-control inline-block w150" v-model="returnDay"> -->
+                        <!-- </label> -->
+                    </div>
+                    <div class="float-r">
+                        <button id="takeOutBook_btn_takeOutBook" class="btn btn-success w100" @click="takeOutBook();">도서대여</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

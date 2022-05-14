@@ -1,0 +1,78 @@
+<section id="signIn">
+    <div class="pd-b10 container">
+        <h2>회원가입</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+        <div id="inputField" class="w300 media-mx-w767-w100p">
+            <h6 class="color-red">*모든항목이 필수 입력사항입니다.</h6>
+            <div class="mg-b10">
+                <div class="txt-r mg-b5">
+					<button class="btn btn-default" @click="chkDupl();">중복확인</button>
+                </div>
+                <!-- <input type="text" id="signUpId" class="form-control" name="id" placeholder="4~12자, 영어와 숫자만"> -->
+				<label class="input-style1 w100p">
+					<input type="text" id="signUpId" name="id" placeholder=" ">
+					<span>아이디</span>
+				</label>
+				<div class="font12">*4~12자, 영어와 숫자만</div>
+            </div>
+            <div class="mg-b10">
+				<label class="input-style1 w100p">
+					<input type="password" id="signUpPw" name="password" placeholder=" ">
+					<span>패스워드</span>
+				</label>
+				<div class="font12">4자 이상</div>
+            </div>
+            <div class="mg-b10">
+				<label class="input-style1 w100p">
+					<input type="password" id="signUpPw2" name="password" placeholder=" ">
+					<span>패스워드 확인</span>
+				</label>
+            </div>
+            <div class="mg-b10">
+				<label class="input-style1 w100p">
+					<input type="text" id="signUpName" name="name" placeholder=" ">
+					<span>이름</span>
+				</label>
+            </div>
+            <div class="mg-b10">
+				<label class="input-style1 w100p">
+					<input type="date" id="signUpDateOfBirth" name="birth" placeholder=" ">
+					<span>생년월일</span>
+				</label>
+            </div>
+            <div class="mg-b10">
+                <!-- <h5>성별</h5> -->
+                <label class="mg-r10">
+                    <input type="radio" class="" name="gender" value="남자" checked>
+                    <span>남자</span>
+                </label>
+                <label>
+                    <input type="radio" class="" name="gender" value="여자">
+                    <span>여자</span>
+                </label>
+            </div>
+            <div class="mg-b10">
+				<label class="input-style1 w100p">
+					<input type="number" class="no-btn" id="signUpPhoneNum" name="tel" placeholder=" ">
+					<span>전화번호</span>
+				</label>
+				<div class="font12">ex) 010-0000-0000</div>
+            </div>
+            <div class="mg-b10">
+				<label class="input-style1 w100p">
+					<input type="text" id="signUpAdress" name="address" placeholder=" ">
+					<span>주소</span>
+				</label>
+            </div>
+            <!-- <div class="mg-b10">
+                <label title="체크가 돼있는 경우 가입비가 발생합니다.">
+                    <input type="checkbox" name="isCheckableOut" checked>
+                    <span>도서대여여부</span>
+                </label>
+            </div> -->
+            <div class="txt-r">
+                <button class="btn btn-success w100" @click="signUp();">가입</button>
+            </div>
+        </div>
+    </div>
+</section>

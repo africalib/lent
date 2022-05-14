@@ -1,0 +1,89 @@
+<section id="chartPage" class="">
+    <div class="bg-ccc">
+        <div class="cf pd-t25 media-mx-w767-pd-t0">
+            <div class="float-l w33_3333p pd-h10 txt-c">
+                <h4 class="txt-c media-mx-w480-font14 h30 mg-b0">도서 <br class="none media-mx-w480-block">총수량</h4>
+                <h3 class="">{{addComma(bookListOrderByMonthlyRentCnt.length)}}</h3>
+            </div>
+            <div class="float-l w33_3333p pd-h10 txt-c">
+                <h4 class="txt-c media-mx-w480-font14 h30 mg-b0">회원수</h4>
+                <h3 class="">{{addComma(memberListOrderByMonthlyRentCnt.length)}}</h3>
+            </div>
+            <div class="float-l w33_3333p pd-h10 txt-c">
+                <h4 class="txt-c media-mx-w480-font14 h30 mg-b0">현재 <br class="none media-mx-w480-block">대여수량</h4>
+                <h3 class="">{{addComma(rentBookList.length)}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container pd-v20">
+        <div class="cf mg-10">
+            <div class="float-l w33_3333p h300 pd10 media-mx-w992-w50p media-mx-w767-w100p media-mx-w767-h270">
+                <div class="h100p bg-eee pd10 cf">
+                    <h4 class="txt-c mg-t0 mg-b10">도서 보유 현황</h4>
+                    <div class="txt-c h200">
+                        <div id="pieChart_totalBook"
+						class="inline-block h180 w180 v-middle mg-r-10 media-mx-w1199-mg-r-80
+						media-mx-w992-mg-r-30 media-mx-W767-mg-r10 media-mx-w480-mg-r-76"></div>
+                        <div id="list_totalBook"
+						class="inline-block txt-l v-middle pd3 bg-000-0_3 media-mx-w767-bg0 media-mx-w480-bg-000-0_3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="float-l w33_3333p h300 pd10 media-mx-w992-w50p media-mx-w767-w100p">
+                <div class="h100p bg-eee pd10 cf">
+                    <h4 class="txt-c mg-t0 mg-b10">현재 대여 현황</h4>
+                    <div class="txt-c h200">
+                        <div id="pieChart_totalRentBook"
+						class="inline-block h180 w180 v-middle mg-r-10 media-mx-w1199-mg-r-80
+						media-mx-w992-mg-r-30 media-mx-W767-mg-r10 media-mx-w480-mg-r-76"></div>
+                        <div id="list_totalRentBook"
+						class="inline-block txt-l v-middle pd3 bg-000-0_3 media-mx-w767-bg0 media-mx-w480-bg-000-0_3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="float-l w33_3333p h300 pd10 media-mx-w992-w50p media-mx-w767-w100p">
+                <div class="h100p pd10 bg-eee" style1="box-shadow:0 0 5px #000;">
+                    <h4 class="txt-c mg-t0 mg-b10">이달의 도서 랭킹 10</h4>
+                    <div class="h230 overflow-y-auto">
+						<div class="txt-overflow" v-for="(book, idx) in bookListOrderByMonthlyRentCnt"
+						v-if="book.realRank < 4 && book.monthlyRentCnt > 1">
+							<img :src="'/assets/img/no' + book.realRank + '.svg'" width="30">
+                            <span class="font18">{{book.title}}</span>
+						</div>
+                        <hr class="mg-v3 border-t-dashed-gray">
+                        <div class="txt-overflow" v-for="(book, idx) in bookListOrderByMonthlyRentCnt"
+						v-if="3 < book.realRank && book.realRank < 11 && book.monthlyRentCnt > 1">
+                            <span class="inline-block w30 txt-c">{{book.realRank}}</span>
+                            <span>{{book.title}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="float-l w33_3333p h300 pd10 media-mx-w992-w50p media-mx-w767-w100p">
+                <div class="h100p bg-eee pd10">
+                    <h4 class="txt-c mg-t0 mg-b10">이달의 독서왕 랭킹 10</h4>
+                    <div class="h230 overflow-y-auto">
+						<div class="txt-overflow" v-for="(mbr, idx) in memberListOrderByMonthlyRentCnt"
+						v-if="mbr.realRank < 4 && mbr.monthlyRentCnt > 1">
+							<img :src="'/assets/img/no' + mbr.realRank + '.svg'" width="30">
+                            <span class="font18">{{mbr.mbrNm.substr(0,1)}}**</span>
+						</div>
+                        <hr class="mg-v3 border-t-dashed-gray">
+                        <div class="txt-overflow" v-for="(mbr, idx) in memberListOrderByMonthlyRentCnt"
+						v-if="3 < mbr.realRank && mbr.realRank < 11 && mbr.monthlyRentCnt > 1">
+                            <span class="inline-block w30 txt-c">{{mbr.realRank}}</span>
+                            <span>{{mbr.mbrNm.substr(0,1)}}**</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="float-l w33_3333p h300 pd10 media-mx-w992-w50p media-mx-w767-w100p"> -->
+                <!-- <div class="h100p bg-eee"></div> -->
+            <!-- </div> -->
+            <!-- <div class="float-l w33_3333p h300 pd10 media-mx-w992-w50p media-mx-w767-w100p"> -->
+                <!-- <div class="h100p bg-eee"></div> -->
+            <!-- </div> -->
+        </div>
+    </div>
+</section>

@@ -1,0 +1,82 @@
+<div class="pd10">
+	<div class="border-b-ccc">
+		<div class="cf mg-h-5 mg-b10">
+			<div class="float-l w120 pd-h5">
+				<!-- <select id="mngBook_srchType" class="form-control"> -->
+					<!-- <option value="book_cde">도서코드</option> -->
+					<!-- <option value="title">책제목</option> -->
+					<!-- <option value="author_info">저자</option> -->
+					<!-- <option value="pub_info">출판사</option> -->
+				<!-- </select> -->
+				<label class="select-style1 w130 mg-b0 color-51b651">
+					<select id="mngBook_srchType">
+						<option value="book_cde">도서코드</option>
+						<option value="title">책제목</option>
+						<option value="author_info">저자</option>
+						<option value="pub_info">출판사</option>
+					</select>
+					<span class="color-000">검색유형</span>
+				</label>
+			</div>
+			<div class="float-l pd-h5">
+				<label class="input-style1 w100p mg-b0 color-51b651">
+                    <input type="text" id="mngBook_bookKwd" class="W266" placeholder=" " @keyup.enter="getBookList(5, 0);">
+					<span class="color-000">키워드</span>
+					<button class="btn btn-success v-top pd-v3-h6 mg-t1 w80" @click="getBookList(5, 0, 0, 'all');">검색</button>
+				</label>
+				<!-- <input type="text" id="mngBook_bookKwd" class="form-control" @keyup.enter="getBookList(5, 0);"> -->
+			</div>
+			<!-- <div class="float-l pd-h5 txt-c media-mx-w767-w100p media-mx-w767-mg-t10"> -->
+				<!-- <button class="btn btn-success w100" @click="getBookList(5, 0, 0, 'all');">검색</button> -->
+			<!-- </div> -->
+		</div>
+		<div class="cf">
+			<div class="float-l">
+				<label class="radio-btn"><input type="radio" v-model="listType" value="all" @change="getBookList(5, 0);"><span>전체</span></label>
+				<label class="radio-btn"><input type="radio" v-model="listType" value="rent" @change="getBookList(5, 0);"><span>대여중</span></label>
+				<label class="radio-btn"><input type="radio" v-model="listType" value="overdue" @change="getBookList(5, 0);"><span>연체중</span></label>
+			</div>
+			<div class="float-r txt-r pd-t17">
+			<!-- <div class="float-r txt-r"> -->
+				<strong>{{books.totalBookCnt? books.totalBookCnt : 0}}건</strong>
+			</div>
+		</div>
+	</div>
+	<div class="mg-b5">
+		<div class="border-b-ccc pd5" :class="book.bookSts == 'hold' ? 'bg-eee' : ''"
+		v-for="(book, idx) in books.bookList" @click="getBookInfo(idx);">
+			<div class="cf">
+				<div class="float-l w100p-120 txt-overflow">
+					<!-- <span class="mg-r5 font1rem">[종교]</span> -->
+					<span>[{{book.bookCde}}]</span>
+					<span v-if="book.seriesTitle">{{book.seriesTitle}} / </span>
+					<span>{{book.title}}</span>
+				</div>
+				<div class="float-r w120 txt-r">
+					<strong v-if="book.returnDt" :class="[book.returnDt < book.today ? 'color-red' : 'color-5ecf5e']">
+						<strong>{{book.returnDt < book.today ? '연체중' : '대여중'}}</strong>
+						<strong class="color-000">({{book.mbrNm}})</strong>
+					</strong>
+					<strong class="color-orange" v-if="book.authorCdeChk != 'y'">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span>청구기호라벨</span>
+					</strong>
+					
+				</div>
+			</div>
+			<div class="font1_2rem cf">
+				<div class="float-l w100p-120 txt-overflow"><span>{{book.authorInfo}}</span> | <span>{{book.pubInfo}}</span></div>
+				<div class="float-r w120 txt-r"><strong><span class="color-42c7d5">[{{book.classNo}}]</span> {{book.authorCde}}</strong></div>
+			</div>
+		</div>
+	</div>
+	<div id="mngBook_pagingBox" v-if="paging.pageCnt > 1" class="txt-c">
+		<button class="btn btn-light" @click="changePageGroup(-1);">&lt;</button>
+		<button class="btn btn-light mg-h3 page-idx" v-for="idx in paging.pageCnt"
+		v-if="(paging.pageGroupOffset * paging.limitPageCnt) < idx &&
+		idx <= ((paging.pageGroupOffset * paging.limitPageCnt) + paging.limitPageCnt)"
+		@click="getBookList(5, (idx - 1));">{{idx}}</button>
+		<button class="btn btn-light" @click="changePageGroup(1);">&gt;</button>
+	</div>
+</div>
+

@@ -1,0 +1,24 @@
+<section id="signIn">
+    <div class="container pd-b10 pd-t20">
+        <h2>도서관관리</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+        <div>
+            <label class="radio-btn pointer"><input type="radio" name="libMngMenu" v-model="mngViewPage" value="regBook"><span>도서등록</span></label>
+            <label class="radio-btn pointer"><input type="radio" name="libMngMenu" v-model="mngViewPage" value="mngBook"><span>도서관리</span></label>
+            <label class="radio-btn pointer"><input type="radio" name="libMngMenu" v-model="mngViewPage" value="takeOutBook"><span>도서대여</span></label>
+            <label class="radio-btn pointer"><input type="radio" name="libMngMenu" v-model="mngViewPage" value="returnOfBook"><span>도서반납</span></label>
+            <label class="radio-btn pointer"><input type="radio" name="libMngMenu" v-model="mngViewPage" value="mngMember"><span>회원관리</span></label>
+            <label class="radio-btn pointer"><input type="radio" name="libMngMenu" v-model="mngViewPage" value="barCode"><span>바코드출력</span></label>
+            <label class="radio-btn pointer"><input type="radio" name="libMngMenu" v-model="mngViewPage" value="printCallNo"><span>청구번호출력</span></label>
+        </div>
+        <div id="mngPageView" class="border-ccc overflow-h-auto">
+            <reg-book v-if="mngViewPage === 'regBook'">도서등록</reg-book>
+            <mng-book v-if="mngViewPage === 'mngBook'">도서관리</mng-book>
+            <take-out-book v-if="mngViewPage === 'takeOutBook'">도서대여</take-out-book>
+            <return-of-book v-if="mngViewPage === 'returnOfBook'"></return-of-book>
+            <mng-member v-if="mngViewPage === 'mngMember'">회원관리</mng-member>
+            <bar-code v-if="mngViewPage === 'barCode'">바코드</bar-code>
+            <print-call-no v-if="mngViewPage === 'printCallNo'">청구번호출력</print-call-no>
+        </div>
+    </div>
+</section>

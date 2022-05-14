@@ -1,0 +1,23 @@
+<section id="requstBookPage" class="">
+    <div class="container pd-v20">
+        <h2>히든페이지</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+		<div>
+			<div class="mg-b5">
+				<button class="btn btn-danger" @click="initRank();">랭킹초기화</button>
+			</div>
+			<div id="hidden_editMemberInfo" class="border-ccc mg-b5 pd5 inline-block txt-c">
+				<label class="mg-b0">
+					<span class="v-middle">최대 대여량: </span>
+					<input type="number" name="cnt" class="form-control inline-block w50 v-middle no-btn" value="5">
+				</label>
+				<label class="mg-b0">
+					<span class="v-middle">대여일: </span>
+					<input type="number" name="date" class="form-control inline-block w50 v-middle no-btn" value="14">
+				</label>
+				<br class="none media-mx-w420-block">
+				<button class="btn btn-warning v-middle media-mx-w420-mg-t-5" @click="editRent();">일괄적용</button>
+			</div>
+		</div>
+    </div>
+</section>

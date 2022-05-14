@@ -1,0 +1,44 @@
+<section id="qnaListPage" class="">
+    <div class="container pd-b10 pd-t20">
+		<h2>묻고답하기</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+        <div class="cf mg-b5">
+			<div class="float-l">
+				<label class="input-style1 w216 mg-b0 color-51b651">
+					<input type="text" id="qnaListPage_kwd" class="W160" placeholder=" " @keyup.enter="getQnaList(5, 0);">
+					<span class="color-000">키워드</span>
+					<button class="btn btn-success v-top pd-v3-h6 mg-t1" @click="getQnaList(5, 0);">검색</button>
+				</label>
+			</div>
+			<div class="float-r">
+                <button class="btn btn-default" @click="writtenManager('new');">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+				</button>
+            </div>
+        </div>
+        <div class="border-t-ccc mg-b10">
+            <div class="border-b-ccc pd5" v-for="qna in qnaList.boardList"
+			@click="writtenManager('view', qna.seq, qna.title, qna.content, qna.regId);">
+				<div class="cf">
+                    <div class="float-l"><span>{{qna.type}}</span>{{qna.title}}</div>
+                    <div class="float-r">{{qna.regId}}</div>
+                </div>
+                <div class="cf">
+                    <div class="float-l">
+						<span class="radius20 color-fff bg-3758e3 pd-v3-h6 font10" v-if="qna.comentCnt > 0">댓글 {{qna.comentCnt}}+</span>
+					</div>
+                    <div class="float-r"><span>{{qna.regDt}}</span></div>
+                </div>
+			</div>
+        </div>
+		
+		<div id="qnaListPage_pagingBox" v-if="paging.pageCnt > 1" class="txt-c">
+			<button class="btn btn-light" @click="changePageGroup(-1);">&lt;</button>
+			<button class="btn btn-light mg-h3 page-idx" v-for="idx in paging.pageCnt"
+			v-if="(paging.pageGroupOffset * paging.limitPageCnt) < idx &&
+			idx <= ((paging.pageGroupOffset * paging.limitPageCnt) + paging.limitPageCnt)"
+			@click="getQnaList(5, (idx - 1));">{{idx}}</button>
+			<button class="btn btn-light" @click="changePageGroup(1);">&gt;</button>
+		</div>
+    </div>
+</section>

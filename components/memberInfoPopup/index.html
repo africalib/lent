@@ -1,0 +1,110 @@
+<div class="pd10">
+    <div id="popup_memberInfo" class="border-ccc pd5 mg-b10">
+		<input type="hidden" :value="memberInfo.mbrSeq" name="mbrSeq">
+        <div class="cf mg-b5">
+            <div class="float-l mg-r10">
+                <span>ID: </span>
+                <input type="text" class="form-control w120 inline-block" name="mbrId" v-model="memberInfo.mbrId" readonly>
+            </div>
+            <div class="float-l">
+                <span>회원번호: </span>
+                <input type="text" class="form-control inline-block w70" name="mbrCde" v-model="memberInfo.mbrCde" readonly>
+            </div>
+            <div class="float-r">
+                <button class="btn btn-danger" @click="" v-if="memberInfo.mbrId">비밀번호 초기화</button>
+                <button class="btn btn-warning" @click="isEdit = true" v-if="!isEdit">수정</button>
+				<span v-else>
+					<button class="btn btn-success" @click="editInfo();">저장</button>
+					<button class="btn btn-default" @click="isEdit = false;">취소</button>
+				</span>
+                <button class="btn btn-danger">탈퇴</button>
+            </div>
+        </div>
+        <div class="cf mg-b5">
+            <div class="float-l mg-r10">
+                <span>이름: </span>
+                <input type="text" class="form-control w90 inline-block" name="mbrNm" v-model="memberInfo.mbrNm" :readonly="!isEdit">
+            </div>
+            <div class="float-l mg-r10">
+                <span>생년월일: </span>
+                <input type="number" class="form-control inline-block w80 not-btn" name="mbrBirth" v-model="memberInfo.mbrBirth" :readonly="!isEdit">
+            </div>
+            <div class="float-l pd-t5">
+                <label class="mg-r10"><input type="radio" name="mbrGender" class="MG-R5" :checked="memberInfo.mbrGender == '남자'" :readonly="!isEdit" value="남자"><span>남자</span></label>
+                <label><input type="radio" name="mbrGender" class="MG-R5" :checked="memberInfo.mbrGender == '여자'" :readonly="!isEdit" value="여자"><span>여자</span></label>
+            </div>
+        </div>
+        <div class="cf mg-b5">
+            <div class="float-l mg-r10">
+                <span>전화번호: </span>
+                <input type="text" class="form-control inline-block w130" name="mbrTel" v-model="memberInfo.mbrTel" :readonly="!isEdit">
+            </div>
+            <div class="float-l">
+                <span>주소: </span>
+                <input type="text" class="form-control inline-block w428" name="mbrAddress" v-model="memberInfo.mbrAddress" :readonly="!isEdit">
+            </div>
+        </div>
+        <hr class="mg-v5">
+        <div class="cf">
+            <div class="float-l mg-r10">
+                <span>등급: </span>
+                <select class="form-control inline-block w100 txt-r" name="mbrGrade" :readonly="!isEdit">
+                    <option>회원</option>
+                </select>
+            </div>
+            <div class="float-l mg-r10">
+                <span>최대 대여량: </span>
+                <input type="number" class="form-control inline-block w50 txt-r no-btn" name="mbrMxCnt" v-model="memberInfo.mbrMxCnt" :readonly="!isEdit">
+            </div>
+            <div class="float-l mg-r10">
+                <span>최대 대여일: </span>
+                <input type="number" class="form-control inline-block w50 txt-r no-btn" name="mbrMxDate" v-model="memberInfo.mbrMxDate" :readonly="!isEdit">
+            </div>
+            <div class="float-l">
+                <label class="mg-t6">
+                    <input type="checkbox" class="mg-r5" checked :readonly="!isEdit" name="isAvailable" value="y">
+                    <span>대여가능</span>
+                </label>
+            </div>
+        </div>
+    </div>
+	<div id="popup_memberInfo_rentBook" class="border-ccc pd5">
+		<div class="cf">
+			<div class="float-l">
+				<label class="radio-btn"><input type="radio" v-model="listType" @change="getMemberListByListType();" value="all"><span>전체</span></label>
+				<label class="radio-btn"><input type="radio" v-model="listType" @change="getMemberListByListType();" value="rent"><span>대여중</span></label>
+				<label class="radio-btn"><input type="radio" v-model="listType" @change="getMemberListByListType();" value="overdue"><span>연체중</span></label>
+				<label class="radio-btn"><input type="radio" v-model="listType" @change="getMemberListByListType();" value="lastMonth"><span>최근한달</span></label>
+			</div>
+			<div class="float-r pd-t17">
+				<strong>{{rentBookList.length}}건</strong>
+			</div>
+		</div>
+		<!-- <hr class="mg-v5"> -->
+		<div class="mx-h250 overflow-y-auto border-t-ccc">
+			<div class="border-b-ccc pd5" v-for="(book, idx) in rentBookList">
+				<div class="cf">
+					<div class="float-l w100p-80 txt-overflow">
+						<span>[{{book.bookCde}}] <span class="color-gold">[{{book.authorCde}}]</span> {{book.title}}</span>
+					</div>
+					<div class="float-r w80 txt-r">
+						<strong v-if="book.returnDt" :class="book.isOverdue == 'y' ? 'color-orange' : 'color-5ecf5e'">
+							{{book.isOverdue == 'y' ? '연체반납' : '반납'}}
+						</strong>
+						<strong v-else :class="book.today >= book.libRentBookReturnDt ? 'color-red' : ''">
+							{{book.today >= book.libRentBookReturnDt ? '연체중' : '대여중'}}
+						</strong>
+					</div>
+				</div>
+				<div class="font1_2rem cf">
+					<div class="float-l w100p-140 txt-overflow">
+						<span>{{book.authorInfo}}</span> | <span>{{book.pupInfo}}</span>
+					</div>
+					<div class="float-r w140 txt-r" :class="{'color-red' : book.libRentBookReturnDt && book.today > book.libRentBookReturnDt}">
+						<strong>{{book.rentDt}} ~ {{book.returnDt}}</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="assets/css/layout.css" />
+	<style>
+		@media print {
+			#barcode_btnSection{
+				display:none;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="barcode_btnSection" class="pd10">
+		<button id="barcode_printBtn" class="btn btn-success w80">인쇄</button>
+		<button id="barcode_cancelBtn" class="btn btn-default w80">취소</button>
+	</div>
+	<div id="bgWrapper" class="txt-c mg0auto"></div>
+
+	<script src="assets/js/jquery-3.4.1.min.js"></script>
+	<script src="assets/js/jquery-barcode.js"></script>
+	<script>
+		// alert(opener.document.getElementById('test').value);
+		let parentParam = {
+			labelWidth: opener.document.getElementById('barcode_labelWidth').value,
+			labelHeight: opener.document.getElementById('barcode_labelHeight').value,
+			paddingTop: opener.document.getElementById('barcode_paddingTop').value,
+			paddingLeft: opener.document.getElementById('barcode_paddingLeft').value,
+			libNm: opener.document.getElementById('barcode_libNm').value,
+			libNmFontSize: opener.document.getElementById('barcode_libNmFontSize').value,
+			prfBarcode: opener.document.getElementById('barcode_prfOrder').value,
+			sufBarcode: opener.document.getElementById('barcode_sufOrder').value,
+			labelCnt: opener.document.getElementById('barcode_labelCnt').value
+			//addingWord: opener.document.getElementById('barcode_addingWord').value
+		}
+		
+		console.log(Number(parentParam.sufBarcode) + Number(parentParam.labelCnt));
+		
+		$('#bgWrapper').css({
+			paddingTop:  parentParam.paddingTop + 'mm',
+			paddingLeft: parentParam.paddingLeft + 'mm',
+		});
+		
+		for(let i = 0; i < 21; i++){
+			let barCodeTemplate =
+				'<div id="barcode' + i + '">' +
+					'<div class="vertical-m">' +
+						'<div class="lib-nm"></div>' +
+						'<div class="barcode-section txt-c mg0auto"></div>' +
+					'</div>';
+				'</div>';
+			$('#bgWrapper').append(barCodeTemplate);
+			
+			$('#barcode' + i).css({
+				width:  parentParam.labelWidth + 'mm',
+				height: parentParam.labelHeight + 'mm',
+				marginBottom: '5mm',
+				//border: '1px solid',
+				display: 'inline-block'
+			});
+			
+			if(i % 3 == 1){
+				$('#barcode' + i).css({
+					marginLeft: '15mm',
+					marginRight: '15mm'
+				});
+			}
+			
+			if(i < Number(parentParam.labelCnt)){
+				<!-- $('#barcode' + i).find('.barcode-section').barcode((parentParam.prfBarcode + (Number(parentParam.sufBarcode) + i)), "code128"); -->
+				$('#barcode' + i).find('.barcode-section').barcode(creatorCde(parentParam.prfBarcode, Number(parentParam.sufBarcode) + i, 8), "code128");
+				$('#barcode' + i).find('.lib-nm').html(parentParam.libNm);
+			}
+		}
+		
+		if (window.matchMedia) {
+			var mediaQueryList = window.matchMedia('print');
+			mediaQueryList.addListener(function(mql) {
+				if (mql.matches) {
+					//before
+				} else {
+					//after;
+					console.log(parentParam.labelCnt);
+					let nextCde = Number(parentParam.sufBarcode) + Number(parentParam.labelCnt);
+					$.ajax({
+						type: 'POST',
+						url: 'http://jesusville.or.kr/lib/api/books.php?act=setNewOrderedCode',
+						data: {nextCde: nextCde},
+						success: function(res){
+							opener.document.getElementById("barcode_sufOrder").value = res.trim();
+							window.close();
+						}
+					})
+						
+				}
+			});
+		}
+		
+		$('#barcode_printBtn').on('click', function(){
+		alert();
+			window.print();
+		}).focus();
+		
+		function creatorCde(prefix, code, mx0cnt){
+			let result = prefix;
+			let strCode = String(code);
+			let strCodeLen = strCode.length;
+			let cnt0 = mx0cnt - strCodeLen;
+			
+			for(let i = 0; i < cnt0; i++){
+				result += '0';
+			}
+			
+			result += strCode;
+			
+			return result;
+		}
+		
+		
+	</script>
+</body>
+</html>

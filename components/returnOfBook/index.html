@@ -1,0 +1,69 @@
+<div class="pd10">
+    <div class="cf mg-h-5 mg-b10">
+		<div>
+            <label class="mg0">
+                <span class="v-middle">도서검색:</span>
+                <input type="text" id="returnOfBook_bookCde" class="form-control inline-block w180" @keyup.enter="getBookInfo($event);">
+            </label>
+        </div>
+    </div>
+    <div class="border-b-ccc pd5" v-if="bookInfo.bookCde != ''">
+        <div>
+            <!-- <span class="mg-r5 font1rem">[종교]</span> -->
+			<strong class="radius20 color-fff pd-v3-h6 font10 v-top blink-bg-red-1s"
+			v-if="bookInfo.today > bookInfo.returnDt">
+				연체중 <span class="font14">+{{(new Date(bookInfo.today) - new Date(bookInfo.returnDt)) / 86400000}}</span>
+			</strong>
+			<span>{{bookInfo.title}}</span>
+        </div>
+        <div class="font1_2rem">
+            <span>{{bookInfo.authorInfo}}</span> | <span>{{bookInfo.pubInfo}}</span>
+        </div>
+        <!-- <div>위치: <strong>{{bookInfo.storageCde}}</strong></div> -->
+        <div class="cf mg-t5 font12">
+            <div class="float-l">
+                <label class="mg-r5">
+                    <span class="v-middle">대여일:</span>
+                    <input type="date" class="form-control inline-block w150" :value="bookInfo.rentDt" readonly>
+                </label>
+                <label>
+                    <span class="v-middle">반납일:</span>
+                    <input type="date" id="returnOfBook_returnDate" class="form-control inline-block w150" :value="bookInfo.returnDt" :readonly="!editReturnDate">
+                </label>
+				<span v-if="!editReturnDate">
+					<button class="btn btn-warning v-top" @click="editReturnDate = true">기간조정</button>
+				</span>
+				<span v-else>
+					<button class="btn btn-success v-top" @click="adjustReturnDate();">기간수정</button>
+					<button class="btn btn-default v-top" @click="editReturnDate = false">취소</button>
+				</span>
+            </div>
+            <div class="float-r">
+            </div>
+        </div>
+        <div class="border-v-ccc pd5 cf h68">
+            <div class="float-l w100p-100 h100p" @click="">
+                <div class="cf mg-b5">
+                    <div class="float-l">
+						<span>{{memberInfo.mbrNm}}</span>
+						<span>[{{memberInfo.mbrCde}}]</span>
+						<span v-if="memberInfo.mbrId">[{{memberInfo.mbrId}}]</span>
+					</div>
+                </div>
+                <!-- <div class="font1rem mg-b5"> -->
+					<!-- <span>{{memberInfo.mbrBirth}}</span> -->
+					<!-- <strong class="radius20 color-fff bg-3758e3 pd-v3-h6">남자</strong> -->
+				<!-- </div> -->
+                <div class="font1rem">{{memberInfo.mbrAddress}}</div>
+            </div>
+            <div class="float-l w100 txt-r h100p">
+                <div class="vertical-m">
+                    <div><span>{{memberInfo.mbrTel}}</span></div>
+                    <div class="mg-t5">
+                        <button id="returnBtn" class="btn btn-success" @click="returnBook();">도서반납</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

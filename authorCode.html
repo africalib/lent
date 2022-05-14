@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="assets/css/layout.css" />
+	<style>
+		@media print {
+			#authorCode_btnSection{
+				display:none;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="authorCode_btnSection" class="pd10">
+		<label>
+			<span>빈칸: </span> 
+			<input type="number" id="authorCode_blankCnt" class="form-control inline-block w60 no-btn" placeholder="0~29" value="0">
+		</label>
+		<button id="authorCode_blankSetBtn" class="btn btn-warning">적용</button>
+		<button id="authorCode_printBtn" class="btn btn-success w80">인쇄</button>
+		<button id="authorCode_cancelBtn" class="btn btn-default w80">취소</button>
+	</div>
+	<div id="authorCode_bgWrapper" class="mg0auto" style="padding-top:30mm; padding-left:15mm;"></div>
+
+	<script src="assets/js/jquery-3.4.1.min.js"></script>
+	<script src="assets/js/jquery-barcode.js"></script>
+	<script>
+		// alert(opener.document.getElementById('test').value);
+		let data = [];
+		let bookCdes = [];
+		let inputSection = opener.document.getElementById('regBook_BookWithoutAuthorCdeList');
+		$(inputSection).find('input[data-name="bookWithoutAuthorCde"]:checked').each(function(){
+			data.push($(this).data());
+			bookCdes.push($(this).data('bookCde'));
+		})
+		
+		setCode(0);
+		
+		function setCode(blankCnt){
+			let cstmData = data.slice();
+			
+			for(let i = 0; i < blankCnt; i++){
+				cstmData.unshift('');
+			}
+			
+			$('#authorCode_bgWrapper').html('');
+			
+				
+			for(let j = 0; j < 30; j++){
+				let barCodeTemplate =
+					//'<div id="authorCode' + j + '" class="border- border-box">' +
+					'<div id="authorCode' + j + '" class="border-box">' +
+						'<div class="vertical-m txt-c">' +
+							'<div class="h18 line-h18px authorCode_classNo"></div>' +
+							'<div class="h18 line-h18px authorCode_authorCode"></div>' +
+							'<div class="h18 line-h18px mg-b5 authorCode_claimNo"></div>' +
+							'<div class="h18 line-h18px mg-b5 authorCode_copyNo"></div>' +
+							'<div class="h18 line-h18px authorCode_bookCde"></div>' +
+						'</div>';
+					'</div>';
+					
+				$('#authorCode_bgWrapper').append(barCodeTemplate);
+				
+				$('#authorCode' + j).css({
+					width: '30mm',
+					height: '31mm',
+					display: 'inline-block',
+					verticalAlign: 'top',
+					marginRight: '7.8mm',
+					marginBottom: '10.5mm'
+				});
+				
+				//복본도 해야함... c.
+				
+				if(j%5 == 4) $('#authorCode' + j).css('margin-right', 0);
+				
+				if(cstmData[j]){
+					$('#authorCode' + j).find('.authorCode_classNo').html(cstmData[j].classNo);
+					$('#authorCode' + j).find('.authorCode_authorCode').html(cstmData[j].authorCode);
+					let claimNo = cstmData[j].claimNo ?  'v. ' + cstmData[j].claimNo : '';
+					let copyNo = cstmData[j].copyNo ?  'c. ' + cstmData[j].copyNo : '';
+					$('#authorCode' + j).find('.authorCode_claimNo').html(claimNo);
+					$('#authorCode' + j).find('.authorCode_copyNo').html(copyNo);
+					$('#authorCode' + j).find('.authorCode_bookCde').html(cstmData[j].bookCde);
+				}
+			}
+		}
+		
+		if (window.matchMedia) {
+			var mediaQueryList = window.matchMedia('print');
+			mediaQueryList.addListener(function(mql) {
+				if (mql.matches) {
+					//before
+				} else {
+					//after;
+					$.ajax({
+						type: 'POST',
+						url: 'http://jesusville.or.kr/lib/api/books.php?act=regAuthorCode',
+						data: {bookCde: bookCdes, chkYn : 'y'},
+						success: function(res){
+							if(res == 1){
+								if(!confirm('정상적으로 인쇄가 되었습니까?')){
+									$.ajax({
+										type: 'POST',
+										url: 'http://jesusville.or.kr/lib/api/books.php?act=regAuthorCode',
+										data: {bookCde: bookCdes, chkYn : 'n'},
+										success: function(res){
+											if(res == 1){
+												alert('인쇄를 다시 진행해 주세요.');
+												window.close();
+											}
+										}
+									})
+								}else{
+									window.close();
+									$(opener.document.getElementById("regBook_hiddenRefreshBtn")).click();
+									$(opener.document.getElementById("regBook_chkedCnt")).html('');
+									$(inputSection).find('input[data-name="bookWithoutAuthorCde"]').each(function(){
+										$(this).prop('checked', false);
+									})
+								}
+							}
+						}
+					})
+				}
+			});
+		}
+		
+		$('#authorCode_printBtn').on('click', function(){
+			window.print();
+		}).focus();
+		$('#authorCode_cancelBtn').on('click', function(){
+			window.close();
+		});
+		$('#authorCode_blankSetBtn').on('click', function(){
+			let blankCnt =  $('#authorCode_blankCnt').val() && $('#authorCode_blankCnt').val() > -1 ? $('#authorCode_blankCnt').val() : 0;
+			console.log(blankCnt);
+			setCode(blankCnt);
+		});
+		
+		
+		
+	</script>
+</body>
+</html>

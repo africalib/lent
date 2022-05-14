@@ -1,0 +1,38 @@
+<section id="requstBookPage" class="">
+    <div class="container pd-v20">
+        <h2 class="media-mx-w767-mg-t0">도서검색</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+        <div class="cf mg-b10">
+			<select id="searchBookPage_srchType" name="srchType" class="form-control inline-block w100 radius0 font16 v-top">
+				<option value="all">전체</option>
+				<option value="title">책제목</option>
+				<option value="author_info">저자</option>
+				<option value="pub_info">출판사</option>
+			</select>
+			<input type="text" id="searchBookPage_bookKwd" name="bookKwd" class="w180 form-control inline-block radius0 font16 v-top" placeholder="키워드" @keyup.enter="getBookList();">
+			<button class="btn btn-success v-top radius0 w80 mg0auto
+			media-mx-w480-block media-mx-w480-mg-t5 media-mx-w480-w120" @click="getBookList();">검색</button>
+        </div>
+		<div class="txt-r font-w900" v-if="bookList && bookList.length > 0">{{bookList.length}} 건</div>
+        <div id="searchBookPage_bookList" class="overflow-y-auto border-t-ccc mg-b10">
+            <div class="border-b-ccc pd5" v-for="(book, idx) in bookList">
+                <div class="cf">
+                    <div class="float-l w100p-80 txt-overflow">
+                        <span class="font1rem">[{{book.classNm}}]</span>
+						<span v-if="book.seriesTitle" v-html="book.seriesTitle + ' /'"></span>
+						<span v-html="book.title"></span>
+                    </div>
+                    <div class="float-l w80 txt-r">
+						<strong :class="book.rentBookCde && book.rentBookCde.length > 0 ? 'color-red' : 'color-5ecf5e'">
+							{{book.bookSts == 'readOnly' ? '열람만 가능' : book.rentBookCde ? '대여불가능' : '대여가능'}}
+						</strong>
+                    </div>
+                </div>
+                <div class="font1_2rem cf">
+                    <div class="float-l w100p-120 txt-overflow"><span v-html="book.authorInfo"></span> | <span v-html="book.pubInfo"></span></div>
+                    <div class="float-r w120 txt-r"><strong><span class="color-42c7d5">[{{book.classNo}}]</span> {{book.authorCde}}</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

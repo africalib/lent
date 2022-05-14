@@ -1,0 +1,179 @@
+<div>
+	<section>
+		<!-- <article class="h500 media-mx-w767-h250 relative"> -->
+			<!-- <div class="swiper-container h100p"> -->
+				<!-- <div class="swiper-wrapper h100p"> -->
+					<!-- <div class="swiper-slide h100p" style="background:url(/assets/img/lib_2.png) no-repeat center; background-size:cover;"></div> -->
+					<!-- <div class="swiper-slide h100p" style="background:url(/assets/img/lib_4.png) no-repeat center; background-size:cover;"></div> -->
+					<!-- <div class="swiper-slide h100p" style="background:url(/assets/img/lib_5.png) no-repeat center; background-size:cover;"></div> -->
+				<!-- </div> -->
+			<!-- </div> -->
+			<!-- <div class="absolute top0 left0 right0 bottom0 z-idx1"> -->
+				<!-- <div class="absolute txt-r right25 color-fff top40 media-mx-w767-top20 media-mx-w767-top30 media-mx-w767-right10"> -->
+					<!-- <div class="font-fam05 font40 line-h40px mg-r10 media-mx-w767-font25 media-mx-w767-line-h25px"> -->
+						<!-- <span style="text-shadow:0 0 3px #0f0;">다음세대</span>와 -->
+						<!-- <span style="text-shadow:0 0 3px #0f0;">지역사회</span>를 품는<br/> -->
+						<!-- <span style="text-shadow:0 0 3px #0f0;">비전</span>을 가진 -->
+					<!-- </div> -->
+					<!-- <div class="font-fam04 font60 media-mx-w767-font40 media-mx-w420-font30" -->
+					<!-- style="text-shadow: 2px 2px #000;">그루터기 작은도서관</div> -->
+				<!-- </div> -->
+				<!-- <h5 class="w100p absolute bottom0 txt-r pd10 bg-000-0_3 color-fff font12 font-w900 font-fam07 font30 -->
+				<!-- media-mx-w1199-font25 media-mx-w1199-font20 media-mx-w480-font16 media-mx-w420-font13"> -->
+					<!-- A <span class="color-75fbbd">L</span>ibrary with a vision -->
+					<!-- <br class="none media-mx-w767-block"/> -->
+					<!-- that -->
+					<!-- <span class="color-75fbbd">E</span>mbraces the -->
+					<!-- <span class="color-75fbbd">N</span>ext geneation and -->
+					<!-- <span class="color-75fbbd">T</span>own -->
+				<!-- </h5> -->
+			<!-- </div> -->
+		<!-- </article> -->
+		<article>
+			<img src="/assets/img/lib_img_pc.png" width="100%"/>
+		</article>
+		<article style="background:url(/assets/img/lib_search_bg.png) no-repeat; background-size:100%; background-attachment:fixed;">
+			<div class="container pd-b20 txt-c">
+				<div>
+					<img src="/assets/img/lib_search_icon.svg" width="150">
+				</div>
+				<input type="text" id="home_quickBookSearch" placeholder="도서검색"
+				class="w400 form-control inline-block radius0 font16 v-top media-mx-w767-w200"
+				@keyup.enter="quickSearchBook();">
+				<button class="btn btn-success v-top radius0 w80 mg0auto" @click="quickSearchBook();">검색</button>
+			</div>
+		</article>
+		<article class="pd-v20 media-mx-w480-pd0">
+			<ul class="list-style-none mg0auto pd0 cf w900 media-mx-w992-w450 media-mx-w480-w300">
+				<li class="quick-menu float-l w150 h150 txt-c pointer relative" @click="$root.headToPage('lib-info-page');">
+					<div class="vertical-m color-030">
+						<div class="quick-icon txt-c font5rem">
+							<img src="/assets/img/quickMenu/058-signpost.svg" height="80">
+							<!-- <div>Icons made by -->
+							<!-- <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from -->
+							<!-- <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+							<!-- </div> -->
+						</div>
+						<div>도서관소개</div>
+					</div>
+				</li>
+				<li class="quick-menu float-l w150 h150 txt-c pointer relative" @click="$root.headToPage('manual-page');">
+					<div class="vertical-m color-030">
+						<div class="quick-icon txt-c font5rem">
+							<img src="/assets/img/quickMenu/073-guide.svg" height="80">
+							<!-- <div>Icons made by -->
+							<!-- <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from -->
+							<!-- <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+							<!-- </div> -->
+						</div>
+						<div>이용안내</div>
+					</div>
+				</li>
+				<li class="quick-menu float-l w150 h150 txt-c pointer relative" @click="$root.headToPage('request-book-list-page');">
+					<div class="vertical-m color-030">
+						<div class="quick-icon txt-c font5rem">
+							<img src="/assets/img/quickMenu/049-edit.svg" height="80">
+							<!-- <div>Icons made by -->
+							<!-- <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from -->
+							<!-- <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+							<!-- </div> -->
+						</div>
+						<div>도서신청</div>
+					</div>
+				</li>
+				<li class="quick-menu float-l w150 h150 txt-c pointer relative" @click="$root.headToPage('chart-page');">
+					<div class="vertical-m color-030">
+						<div class="quick-icon txt-c font5rem">
+							<img src="/assets/img/quickMenu/013-bar chart.svg" height="80">
+							<!-- <div>Icons made by -->
+							<!-- <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from -->
+							<!-- <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+							<!-- </div> -->
+						</div>
+						<div>통계</div>
+					</div>
+				</li>
+				<li class="quick-menu float-l w150 h150 txt-c pointer relative" @click="$root.headToPage('way-to-come-page');">
+					<div class="vertical-m color-030">
+						<div class="quick-icon txt-c font5rem">
+							<img src="/assets/img/quickMenu/083-location.svg" height="80">
+							<!-- <div>Icons made by -->
+							<!-- <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from -->
+							<!-- <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+							<!-- </div> -->
+						</div>
+						<div>오시는길</div>
+					</div>
+				</li>
+				<li class="quick-menu float-l w150 h150 txt-c pointer relative" @click="$root.headToPage('goods-sharing-list-page');">
+					<div class="vertical-m color-030">
+						<div class="quick-icon txt-c font5rem">
+							<img src="/assets/img/quickMenu/096-bookshelf.svg" height="80">
+							<!-- <div>Icons made by -->
+							<!-- <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from -->
+							<!-- <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+							<!-- </div> -->
+						</div>
+						<div>물품나눔터</div>
+					</div>
+				</li>
+			</ul>
+		</article>
+		<article style="background:url(/assets/img/bg-pattern3.png);">
+			<div class="container cf pd-v20">
+				<div class="mg-h-10 cf">
+					<div class="float-l w50p pd-h10 media-mx-w767-w100p media-mx-w767-float-none media-mx-w767-mg-b10">
+						<div class="bg-fff pd10">
+							<h3 class="media-mx-w767-font1_5rem">
+								<span>공지사항</span>
+								<strong class="radius20 color-fff bg-5ecf5e pd-v3-h6 pointer font12"
+								@click="$root.headToPage('notice-list-page');">더보기 +</strong>
+							</h3>
+							<div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+							<table class="w100p h135 table-fixed">
+								<colgroup>
+									<col>
+									<col width="100">
+								</colgroup>
+								<tr class="border-b-ccc h26" v-for="notice in shortNoticeList">
+									<td class="pd-h5 txt-ellipsis">{{notice.title}}</td>
+									<td class="txt-r">{{notice.regDt.substr(0, 10)}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="float-l w50p pd-h10 media-mx-w767-w100p media-mx-w767-float-none">
+						<div class="bg-fff pd10">
+							<h3 class="media-mx-w767-font1_5rem">
+								<span>신간도서</span>
+								<strong class="radius20 color-fff bg-5ecf5e pd-v3-h6 pointer font12"
+								@click="$root.headToPage('new-book-page');">더보기 +</strong>
+							</h3>
+							<div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+							<table class="w100p h135 table-fixed">
+								<colgroup>
+									<col>
+									<col width="100">
+								</colgroup>
+								<tr class="border-b-ccc h26" v-for="book in shortNewBookList">
+									<td class="pd-h5 txt-ellipsis">{{book.title}}</td>
+									<td class="txt-r txt-ellipsis">{{book.authorInfo}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</section>
+	
+	<!-- <div class="popups"> -->
+		<!-- <div class="popup" v-for="(p, idx) in popups" :style="{marginLeft:idx * 100 + 'px'}" v-if="p.visible"> -->
+			<!-- <div class="content">{{ p.imgUrl }}</div> -->
+			<!-- <div class="bottom">  -->
+				<!-- <div class="left" @click="closePopup(idx, true)">NO MORE</div> -->
+				<!-- <div class="right" @click="closePopup(idx)">CLOSE</div> -->
+			<!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
+</div>

@@ -1,0 +1,6 @@
+.card-effect{transition:top .3s, opacity .3s, transform .3s;}
+.fade-out-effect{transform:scale(1.5); opacity:0;}
+
+.progressBar40{background:linear-gradient(to bottom, transparent, transparent, #afa, transparent, transparent);}
+.progressBar15{background:linear-gradient(to bottom, transparent, transparent, #ffa, transparent, transparent);}
+.progressBar5{background:linear-gradient(to bottom, transparent, transparent, #faa, transparent, transparent);}

@@ -1,0 +1,31 @@
+<div class="pd10">
+    <div id="popup_signUp" class="border-ccc pd5 mg-b10">
+        <div class="cf mg-b5">
+            <div class="mg-b5">
+                <span class="inline-block w70 txt-r font-w900 color-red">*이름: </span>
+                <input type="text" class="form-control w300 inline-block" name="mbrNm" data-required="true">
+            </div>
+            <div class="mg-b5">
+                <span class="inline-block w70 txt-r">생년월일: </span>
+                <input type="date" class="form-control inline-block w300 not-btn" name="mbrBirth" placeholder="1900-01-01">
+            </div>
+            <div class="mg-b5">
+				<span class="inline-block w70 txt-r font-w900 color-red">*성별: </span>
+                <label class="mg-r10"><input type="radio" name="mbrGender" class="MG-R5" checked value="남자"><span>남자</span></label>
+                <label><input type="radio" name="mbrGender" class="MG-R5" value="여자"><span>여자</span></label>
+            </div>
+            <div class="mg-b5">
+                <span class="inline-block w70 txt-r font-w900 color-red">*전화번호: </span>
+                <input type="tel" class="form-control inline-block w300 not-btn" name="mbrTel" data-required="true">
+            </div>
+            <div>
+                <span class="inline-block w70 txt-r">주소: </span>
+                <input type="text" class="form-control inline-block w300" name="mbrAddress"	@keyup.enter="signUp();">
+            </div>
+        </div>
+		<div class="txt-r">
+			<button class="btn btn-success w100" @click="signUp();">가입</button>
+			<button class="btn btn-default w100" @click="$root.popup.name = null;">취소</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,187 @@
+<div class="pd5">
+    <div class="cf mg-h-5 mg-b10">
+        <div id="regBook_inputBookInfo" class="float-l w360 pd5">
+            <div class="border-b-ccc mg-b3">
+				<div class="mg-b3 cf">
+					<div class="float-l w270 pd-r10">
+						<label class="mg-b0 w100p">
+							<span class="color-000">ISBN</span>
+							<input type="text" id="regBook_isbn" class="form-control block radius0 font16 v-top w100p" @keyup.enter="getBookList();" v-model="bookInfo.isbn">
+						</label>
+					</div>
+					<div class="float-r">
+						<button id="btn_searchBook" class="btn btn-success v-top radius0 w80 mg-t20" @click="getBookList();">도서검색</button>
+					</div>
+				</div>
+            </div>
+            <div id="regBook_info" class="border-b-ccc mg-b3">
+                <div class="mg-b3">
+                    <div class="mg-b3">
+						<label class="mg-b0 w100p">
+							<span>총서명</span>
+							<input type="text" id="regBook_seriesTitle" class="form-control block radius0 font16 v-top" v-model="bookInfo.seriesTitle">
+						</label>
+                    </div>
+                    <div class="mg-b3">
+						<label class="mg-b0 w100p">
+							<span class="color-red">*서명</span>
+							<input type="text" id="regBook_title" class="form-control block radius0 font16 v-top" v-model="bookInfo.title">
+						</label>
+                    </div>
+                </div>
+                <div class="mg-b3 cf">
+					<div class="float-l w130">
+						<label class="mg-b0 w100p">
+							<span>서명권차</span>
+							<input type="text" class="form-control block radius0 font16 v-top" disabled>
+						</label>
+					</div>
+					<div class="float-r w216">
+						<label class="mg-b0 w100p">
+							<span class="color-red">*저자</span>
+							<input type="text" id="regBook_author" class="form-control block radius0 font16 v-top" v-model="bookInfo.authorInfo">
+						</label>
+					</div>
+                </div>
+                <div class="mg-b3 cf">
+					<div class="float-l w130">
+						<label class="mg-b0 w100p">
+							<span>출판년도</span>
+							<input type="text" class="form-control block radius0 font16 v-top" v-model="bookInfo.pubYearInfo">
+						</label>
+					</div>
+					<div class="float-r w216">
+						<label class="mg-b0 w100p">
+							<span>출판사</span>
+							<input type="text" class="form-control block radius0 font16 v-top" v-model="bookInfo.pubInfo">
+						</label>
+					</div>
+                </div>
+                <div class="mg-b3">
+					<label class="w100p mg-b0">
+						<span>딸림자료</span>
+						<input type="text" class="block form-control radius0 font16 v-top" v-model="bookInfo.withThings">
+					</label>
+                </div>
+                <div class="mg-b3">
+                    <label class="w130 mg-b0">
+                        <span>도서상태</span>
+                        <select v-model="bookInfo.bookSts" class="w150 form-control inline-block radius0 font16 v-top">
+                            <option value="rent">대출</option>
+                            <option value="readOnly">열람</option>
+                            <option value="hold">보류</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div>
+                <div class="mg-b3 cf">
+                    <div class="float-l w130">
+						<label class="w100p mg-b0">
+							<span>별치기호</span>
+							<input type="text" class="form-control block radius0 font16 v-top" disabled>
+						</label>
+                    </div>
+                    <div class="float-r w216">
+						<div class="float-l w136">
+							<label class="w100p mg-b0">
+								<span class="color-red">*분류기호</span>
+								<input type="text" id="regBook_classNo" class="form-control block radius0 font16 v-top" v-model="bookInfo.classNo">
+							</label>
+						</div>
+						<div class="float-r">
+							<button class="btn btn-success v-top radius0 w80 mg-t20">검색</button>
+						</div>
+                    </div>
+                </div>
+                <div class="mg-b3 cf">
+					<div class="float-l w216">
+						<div class="float-l">
+							<label class="w136 mg-b0">
+								<span class="color-red">*저자기호</span>
+								<input type="text" id="regBook_authorCode" class="form-control block radius0 font16 v-top" v-model="bookInfo.authorCde">
+							</label>
+						</div>
+						<div class="float-r">
+							<button class="btn btn-default v-top radius0 w80 mg-t20" @click="getAuthorCode();">생성</button>
+						</div>
+					</div>
+					<div class="float-r w130">
+						<label class="w100p mg-b0">
+							<span>청구권차</span>
+							<input type="text" class="form-control block radius0 font16 v-top" v-model="bookInfo.claimNo">
+						</label>
+					</div>
+                </div>
+                <div class="mg-b5 cf">
+					
+					
+					<div class="float-l w130">
+						<label class="mg-b0 w100p">
+							<span>복본</span>
+							<input type="text" class="form-control block radius0 font16 v-top" v-model="bookInfo.copyNo">
+						</label>
+					</div>
+					<div class="float-r w216">
+						<label class="mg-b0 w100p">
+							<span class="color-red">*등록번호</span>
+							<input type="text" id="regBook_bookCde" class="form-control block radius0 font16 v-top" v-model="bookInfo.bookCde" @keyup.enter="changeKoToEn();">
+						</label>
+					</div>
+                </div>
+            </div>
+            <div class="txt-r">
+                <button id="regBook_regBtn" class="btn btn-success v-top radius0 w80" @click="regBook_v1()">등록</button>
+                <button class="btn btn-default v-top radius0 w80">취소</button>
+            </div>
+        </div>
+        <div class="float-l w100p-360 border-l-ccc">
+            <div class="pd5">
+                <div class="cf mg-b5">
+                    <div class="float-l">
+						<span class="inline-block w30 pd5">
+							<input id="bookWithoutAuthorCdeAllChk" type="checkbox" class="MG0 w20 h20"
+							v-model="chkAll" @change="chkAll ? chkedCnt = booksWithoutAuthorCde.length : chkedCnt = 0">
+						</span>
+                        <button class="btn btn-success" @click="openAuthorCodePopup();">청구번호출력</button>
+                        <!-- <button class="btn btn-danger" @click="deleteBooks();">선택삭제</button> -->
+                        <button class="btn btn-danger" @click="deleteBooks2();">전체삭제(수동)</button>
+						<button id="regBook_hiddenRefreshBtn" class="btn btn-default none"
+						@click="getBooksWithoutAuthorCde()">reFresh</button> 
+                    </div>
+                    <div class="float-r pd-t17">
+                        <span id="regBook_chkedCnt" v-if="chkedCnt > 0">&#10003; {{chkedCnt}}건 / </span>
+                        <!-- <span>{{chkAll}}</span> -->
+                        <span id="regBook_WithoutAuthorCdeLen" class="font-w900">{{booksWithoutAuthorCde.length}}</span>건
+                    </div>
+                </div>
+				<div id="regBook_BookWithoutAuthorCdeList" class="border-t-ccc overflow-y-auto">
+					<div class="border-b-ccc pd5 cf" v-for="(book, idx) in booksWithoutAuthorCde">
+						<div class="float-l w30 h70">
+							<input type="checkbox" class="MG0 w20 h20 vertical-m"
+							data-name="bookWithoutAuthorCde" :data-author-code="book.authorCde" :data-book-cde="book.bookCde"
+							:data-claim-no="book.claimNo" :data-copy-no="book.copyNo" :data-class-no="book.classNo"
+							@change="getChkedCnt();">
+						</div>
+						<div class="float-l w80 border-ccc txt-c font10 h70 radius10" @click="getBookInfo(book.bookCde);">
+							<div class="vertical-m">
+								<div>{{book.classNo}}</div>
+								<div>{{book.authorCde}}</div>
+								<div>{{book.claimNo ? ('v.' + book.claimNo) : ''}}</div>
+								<div>{{book.copyNo ? ('c.' + book.copyNo) : ''}}</div>
+								<div>{{book.bookCde}}</div>
+							</div>
+						</div>
+						<div class="float-l w100p-110 pd-l5 h70" @click="getBookInfo(book.bookCde);">
+							<div class="vertical-m">
+								<div class="txt-ellipsis" :title="book.title"><span v-if="book.seriesTitle">{{book.seriesTitle}} / </span>{{book.title}}</div>
+								<div class="txt-ellipsis font12" :title="book.authorInfo">{{book.authorInfo}}</div>
+								<div class="txt-r font12"><strong>{{book.regDt}}</strong></div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

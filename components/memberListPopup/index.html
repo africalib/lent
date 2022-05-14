@@ -1,0 +1,24 @@
+<div class="pd10">
+    <div class="border-ccc pd5 mg-b10">
+        <div class="overflow-y-auto max-h250 border-v-ccc">
+            <div class="border-b-ccc pd5 cf h68" v-for="(mbr, idx) in memberList">
+                <div class="float-l w100p-100 h100p">
+                    <div class="cf mg-b5">
+                        <div class="float-l"><span>{{mbr.mbrNm}}</span> <span>[{{mbr.mbrCde}}]</span> <span v-if="mbr.mbrId">[{{mbr.mbrId}}]</span></div>
+                    </div>
+                    <div class="font1rem mg-b5">
+						<span>{{mbr.mbrBirth}}</span>
+						<strong class="radius20 color-fff bg-3758e3 pd-v3-h6" v-if="mbr.mbrGender">{{mbr.mbrGender}}</strong>
+					</div>
+                    <div class="font1rem">{{mbr.mbrAddress}}</div>
+                </div>
+                <div class="float-l w100 txt-r h100p">
+                    <div class="vertical-m">
+                        <div><span>{{mbr.mbrTel}}</span></div>
+                        <div class="mg-t5"><button class="btn btn-info pd-v3-h6 w80" @click="pickMember(mbr.mbrSeq)">선택</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

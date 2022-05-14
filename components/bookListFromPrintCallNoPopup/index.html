@@ -1,0 +1,78 @@
+<div class="pd10">
+	<div class="cf mg-b10">
+		<div class="float-l">
+			<span class="inline-block w30 pd5">
+				<input id="bookWithoutAuthorCdeAllChk" type="checkbox" class="MG0 w20 h20">
+			</span>
+		</div>
+		<div class="float-r">
+			<button class="btn btn-success w80" @click="setBookInfo();">선택</button>
+		</div>
+	</div>
+    <div id="popup_bookList" class="overflow-y-auto max-h200 border-v-ccc mg-b10">
+        <div class="border-b-ccc pd5 pointer" v-for="(book, idx) in books"
+		:data-rec-key="book.REC_KEY" :data-idx="idx" @click="selectBook($event, idx, book.REC_KEY);">
+            <div><span>[{{book.TYPE}}]</span> <span>{{book.TITLE}}</span></div>
+            <div class="cf font1_2rem">
+				<div class="float-l">
+					<span>{{book.AUTHOR}}</span> | <span>{{book.PUBLISHER}}</span>
+				</div>
+				<div class="float-r">
+					<span>{{book.PUBYEAR}}</span>
+				</div>
+			</div>
+        </div>
+    </div>
+	<div id="popup_bookInfo" class="pd5 mg-b10">
+		<div class="mg-b5 cf">
+			<label class="mg0 float-l">
+				<span class="v-middle w70 inline-block txt-r">ISBN:</span>
+				<input type="text" :value="bookInfo.isbn2" class="form-control inline-block w261 h24" readonly>
+			</label>
+			<label class="mg0 float-r">
+				<span class="v-middle w70 inline-block txt-r">총서명:</span>
+				<input type="text" :value="bookInfo.seriesTitle" class="form-control inline-block w261 h24" readonly>
+			</label>
+		</div>
+		<div class="mg-b5">
+			<div class="mg-b5 cf">
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r color-red">*서명:</span>
+					<input type="text" :value="bookInfo.title" class="form-control inline-block w261 h24" readonly>
+				</label>
+				<label class="mg0 float-r">
+					<span class="v-middle w70 inline-block txt-r color-red">*저자:</span>
+					<input type="text" :value="bookInfo.authorInfo" class="form-control inline-block w127 h24" readonly>
+				</label>
+				<label class="mg0 float-r">
+					<span class="v-middle w70 inline-block txt-r color-bbb">서명권차:</span>
+					<input type="text" :value="bookInfo.seriesNo" class="form-control inline-block w60 h24" disabled>
+				</label>
+			</div>
+			<div class="mg-b5 cf">
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r">출판사:</span>
+					<input type="text" :value="bookInfo.pubInfo" class="form-control inline-block w127 h24" readonly>
+				</label>
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r">출판년도:</span>
+					<input type="text" :value="bookInfo.pubYearInfo" class="form-control inline-block w60 h24" readonly>
+				</label>
+				<label class="mg0 float-r">
+					<span class="v-middle w70 inline-block txt-r color-red">*분류기호:</span>
+					<input type="text" :value="bookInfo.classNo" class="form-control inline-block w127 h24" readonly>
+				</label>
+				<label class="mg0 float-r">
+					<span class="v-middle w70 inline-block txt-r">청구권차:</span>
+					<input type="text" class="form-control inline-block w60 h24" :value="bookInfo.claimNo" readonly>
+				</label>
+			</div>
+			<div class="mg-b5 cf">
+				<label class="mg0 float-l">
+					<span class="v-middle w70 inline-block txt-r color-red">딸림자료:</span>
+					<input type="text" :value="bookInfo.withThings" class="form-control inline-block w261 h24" readonly>
+				</label>
+			</div>
+		</div>
+    </div>
+</div>

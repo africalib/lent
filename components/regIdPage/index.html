@@ -1,0 +1,45 @@
+<section id="signIn">
+    <div class="container pd-b10 pd-t20">
+        <h2>아이디 등록</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+        <div id="inputField" class="w300 media-mx-w767-w100p">
+			<div id="regIdPage_checkSection">
+				<div class="mg-b10">
+					<h5>회원번호</h5>
+					<input type="text" class="form-control" name="mbrCde" :readonly="readOnly">
+				</div>
+				<div class="mg-b10">
+					<h5>이름</h5>
+					<input type="text" class="form-control" name="mbrNm" :readonly="readOnly" @keyup.enter="checkMember()">
+				</div>
+				<div class="txt-r">
+					<button class="btn btn-success" @click="checkMember();">확인</button>
+				</div>
+			</div>
+			<div id="regIdPage_accoutSection" v-if="view_accountSection">
+				<hr class="mg-v5"/>
+				<div class="mg-b10">
+					<div class="cf h40">
+						<h5 class="float-l mg-r10">아이디</h5>
+						<div class="float-r">
+							<button class="btn btn-default">중복확인</button>
+						</div>
+					</div>
+					<input type="text" id="regIdPage_id" class="form-control" name="id">
+				</div>
+				<div class="mg-b10">
+					<h5>패스워드</h5>
+					<input type="password" id="regIdPage_pw" class="form-control" name="mbrPw">
+				</div>
+				<div class="mg-b10">
+					<h5>패스워드 확인</h5>
+					<input type="password" id="regIdPage_pw2" class="form-control" name="mbrPw" @keyup.enter="regId();">
+				</div>
+				<div class="txt-r">
+					<button class="btn btn-success w100" @click="regId();">등록</button>
+				</div>
+			</div>
+            
+        </div>
+    </div>
+</section>

@@ -1,0 +1,43 @@
+<section id="libActivityPage" class="">
+    <div class="container pd-b10 pd-t20">
+		<h2 @click="test();">도서관 활동</h2>
+        <div class="linear-right-5ecf5e-tr h3px mg-b10"></div>
+        <div class="mg-b5 cf">
+			<div class="float-l">
+				<button class="btn btn-default radius0" @click="$root.headToPage('lib-activity-list-page');">리스트</button>
+			</div>
+			<div class="float-r">
+				<button class="btn btn-success radius0" v-if="mode === 'new'" @click="reg_board();">등록</button>
+				<button class="btn btn-warning radius0" v-if="mode === 'edit' && editable !== true"
+				@click="editable = true; summerNoteOnOff(true);">수정</button>
+				<button class="btn btn-success radius0" v-if="mode === 'edit' && editable" @click="edit_board();">저장</button>
+				<button class="btn btn-default radius0" v-if="mode === 'edit' && editable"
+				@click="mode = 'edit'; editable = false; summerNoteOnOff(false);">취소</button>
+				<button class="btn btn-danger radius0" v-if="mode === 'edit'" @click="delete_board();">삭제</button>
+			</div>
+        </div>
+        <div class="cf mg-h-5 mg-b5">
+			<div class="pd-h5">
+				<input type="text" id="libActivityPage_title" placeholder="제목" class="w100p form-control inline-block radius0 font16 v-top"
+				:disabled="mode !== 'new' && !editable" v-model="boardInfo.title">
+            </div>
+        </div>
+		<textarea id="summernote" name="editordata"></textarea>
+		<div class="border-t-ccc mg-b10">
+			<div class="border-b-ccc" v-for="coment in boardInfo.coments">
+				<div class="cf pd-t3">
+					<div class="float-l">{{coment.regId}}</div>
+					<div class="float-r" v-if="$root.userInfo.mbrId == coment.regId">
+						<button class="btn btn-danger pd-v3-h6 radius0" @click="deleteComent(coment.comentSeq);">삭제</button>
+					</div>
+				</div>
+				<div>{{coment.content}}</div>
+				<div>{{coment.regDt}}</div>
+			</div>
+		</div>
+		<div v-if="mode !== 'new'">
+			<input type="text" id="libActivityPage_coment" placeholder="댓글입력" class="w100p-84 form-control inline-block radius0 font16 v-top">
+			<button class="btn btn-success v-top radius0 w80 mg0auto" @click="regComent();">댓글달기</button>
+		</div>
+    </div>
+</section>
