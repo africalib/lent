@@ -175,7 +175,6 @@
         },
         mounted: function () {
           let t = this;
-          window.scrollTo(0, 0);
 
           $("#summernote").summernote({
             resize: false,

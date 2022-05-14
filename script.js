@@ -159,6 +159,8 @@ let mainPage = new Vue({
       } else {
         t.viewPage = "";
       }
+
+      window.scrollTo(0, 0);
     },
 
     popup_add: function () {
