@@ -2,7 +2,7 @@
 <html class="w100p">
 <head>
 	<meta charset="UTF-8">
-	<title>그루터기 작은 도서관</title>
+	<title>그루터기작은도서관</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<meta name="description" content="서울시 은평구 응암동에 위치한 그루터기작은도서관입니다.">
 	<meta name="keywords" content="그루터기작은도서관, 은평구, 응암동">
@@ -36,7 +36,7 @@
 		<header class="fixed top0 left0 w100p bg-fff z-idx3 h125 media-mx-w767-h50" style="box-shadow:0 1px 8px #999;">
 			<div class="container h125 media-mx-w767-h50 txt-c relative media-mx-w767-txt-l">
 				<h1 class="inline-block h75 line-h75px mg0 font3rem pointer font-fam03" @click="headToPage('home'); menuControl(false);">
-					<img src="assets/img/logo_full_000.svg?1" class="v-top mg-t10 h55 media-mx-w767-h40 media-mx-w767-mg-t5">
+					<img src="assets/img/logo_full_000.svg?2" class="v-top mg-t10 h55 media-mx-w767-h40 media-mx-w767-mg-t5">
 				</h1>
 				<div class="absolute right0 top10 media-mx-w767-none" v-if="!userInfo.mbrSeq">
 					<strong class="inline-block v-top w90 mg0auto pointer" @click="headToPage('sign-in-page'); menuControl(false);">로그인</strong>
@@ -157,9 +157,7 @@
 			<!-- <hidden-page v-else-if="viewPage === 'hidden'"></hidden-page> -->
 		</div>
 		<footer class="w100p h200 bottom0 fixed bg-999">
-			<div class="container pd-v20">
-				© 그루터기작은 도서관 2021   |   070-8779-1340   |   서울 은평구 은평로10길 17
-			</div>
+			<div class="container pd-v20">© 그루터기작은도서관 2022 | 070-8779-1340 | 서울 은평구 은평로10길 17</div>
 		</footer>
 		<div id="dimLayer" class="fixed top50 bottom0 left0 right0 bg-000-0_5 z-idx2 none"
 		:class="{'BLOCK': popup.name !== null}" v-if="popup.name !== null" @click="menuControl(false);">

@@ -125,7 +125,9 @@
 					<div class="float-l w50p pd-h10 media-mx-w767-w100p media-mx-w767-float-none media-mx-w767-mg-b10">
 						<div class="bg-fff pd10">
 							<h3 class="media-mx-w767-font1_5rem">
-								<span>공지사항</span>
+								<span>
+									<a href="/#notice-list-page" style="color:inherit;text-decoration:none;">공지사항</a>
+								</span>
 								<strong class="radius20 color-fff bg-5ecf5e pd-v3-h6 pointer font12"
 								@click="$root.headToPage('notice-list-page');">더보기 +</strong>
 							</h3>
@@ -136,7 +138,9 @@
 									<col width="100">
 								</colgroup>
 								<tr class="border-b-ccc h26" v-for="notice in shortNoticeList">
-									<td class="pd-h5 txt-ellipsis">{{notice.title}}</td>
+									<td class="pd-h5 txt-ellipsis">
+										<a :href="'/#notice-page/' + notice.seq" style="color:inherit">{{notice.title}}</a>
+									</td>
 									<td class="txt-r">{{notice.regDt.substr(0, 10)}}</td>
 								</tr>
 							</table>

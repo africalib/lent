@@ -19,7 +19,7 @@
               return;
             }
             let t = this;
-            mainPage.headToPage("notice-page");
+            mainPage.headToPage("notice-page/" + seq);
             mainPage.requestMode = regId == mainPage.userInfo.mbrId ? "edit" : mode;
 
             if (mode != "new") {

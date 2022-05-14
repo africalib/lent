@@ -10,6 +10,7 @@
             name: "notice",
             mode: "view",
             editable: false,
+            seq: null,
             boardInfo: {
               seq: "",
               title: "",
@@ -166,10 +167,16 @@
         },
         created: function () {
           var t = this;
-          t.mode = mainPage.requestMode;
+          //t.mode = mainPage.requestMode || "view";
+          t.mode = "view";
+
+          const hashArr = location.hash.split("/");
+          t.seq = hashArr[hashArr.length - 1];
         },
         mounted: function () {
           let t = this;
+          window.scrollTo(0, 0);
+
           $("#summernote").summernote({
             resize: false,
             disableResize: true,
@@ -177,14 +184,37 @@
           });
 
           if (t.mode == "view" || t.mode == "edit") t.summerNoteOnOff(false);
-          t.$nextTick(function () {
-            setTimeout(function () {
-              if (t.boardInfo.seq) {
-                if (t.boardInfo.content) $(".note-editable").html(t.boardInfo.content);
-                t.getComentList();
-              }
-            }, 50);
+
+          $.ajax({
+            type: "POST",
+            url: "http://jesusville.or.kr/lib/api/etc.php?act=getBoardList",
+            data: {
+              boardCde: "100",
+              seq: t.seq,
+            },
+            dataType: "json",
+            success: function (res) {
+              t.boardInfo = {
+                seq: res.boardList[0].seq,
+                title: res.boardList[0].title,
+                content: res.boardList[0].content,
+                coments: [],
+              };
+
+              $(".note-editable").html(t.boardInfo.content);
+              t.getComentList();
+            },
           });
+
+          // t.$nextTick(function () {
+          //   setTimeout(function () {
+          //     if (t.boardInfo.seq) {
+          //       console.log(t.boardInfo.content);
+          //       if (t.boardInfo.content) $(".note-editable").html(t.boardInfo.content);
+          //       t.getComentList();
+          //     }
+          //   }, 50);
+          // });
         },
       });
     });
