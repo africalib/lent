@@ -121,7 +121,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getBookListByClassGroup",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookListByClassGroup",
               success: function (res) {
                 // console.log(res);
                 // return;
@@ -139,7 +139,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getRentBookListByClassGroup",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getRentBookListByClassGroup",
               success: function (res) {
                 t.rentBookListByClassGroup = t.dataSettingForPieGraph(JSON.parse(res));
 
@@ -154,7 +154,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getBookListOrderByMonthlyRentCnt",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookListOrderByMonthlyRentCnt",
               success: function (res) {
                 // console.log(res);
                 // return;
@@ -171,7 +171,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getMemberListOrderByMonthlyRentCnt",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getMemberListOrderByMonthlyRentCnt",
               success: function (res) {
                 // console.log(res);
                 // return;
@@ -193,7 +193,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getRentBookList",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getRentBookList",
               success: function (res) {
                 let resObj = JSON.parse(res);
                 t.rentBookList = resObj;

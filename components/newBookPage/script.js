@@ -19,7 +19,7 @@
             $("#newBookPage_pagingBox").find(".page-idx").removeClass("bg-5ecf5e");
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getNewBookList",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getNewBookList",
               data: {
                 keyword: $("#newBookPage_kwd").val(),
                 dataMxCnt: dataMxCnt,

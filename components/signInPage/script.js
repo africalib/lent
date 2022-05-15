@@ -16,7 +16,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=signIn",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=signIn",
               data: {
                 id: id,
                 password: password,

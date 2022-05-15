@@ -27,7 +27,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getRentBookInfo",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getRentBookInfo",
               data: {
                 bookCde: bookCde,
               },
@@ -38,7 +38,7 @@
                   t.bookInfo = JSON.parse(res)[0];
                   $.ajax({
                     type: "POST",
-                    url: "http://jesusville.or.kr/lib/api/members.php?act=getMemberInfo",
+                    url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=getMemberInfo",
                     data: {
                       mbrCde: t.bookInfo.mbrCde,
                     },
@@ -63,7 +63,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=returnBook",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=returnBook",
               data: {
                 rentSeq: t.bookInfo.rentSeq,
               },
@@ -74,7 +74,7 @@
                   if (t.bookInfo.today > t.bookInfo.returnDt) {
                     $.ajax({
                       type: "POST",
-                      url: "http://jesusville.or.kr/lib/api/members.php?act=increaseOverdueCnt",
+                      url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=increaseOverdueCnt",
                       data: { mbrCde: t.memberInfo.mbrCde },
                       success: function (res) {
                         // console.log(res);
@@ -82,7 +82,7 @@
                         if (res == 1) {
                           $.ajax({
                             type: "POST",
-                            url: "http://jesusville.or.kr/lib/api/books.php?act=updateOverdue",
+                            url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=updateOverdue",
                             data: { rentHistorySeq: t.bookInfo.rentSeq },
                             success: function (res) {
                               alert("반납되었습니다.");
@@ -114,7 +114,7 @@
             // return;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=adjustReturnDate",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=adjustReturnDate",
               data: {
                 rentSeq: t.bookInfo.rentSeq,
                 returnDate: $("#returnOfBook_returnDate").val(),

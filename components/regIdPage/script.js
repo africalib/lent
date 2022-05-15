@@ -33,7 +33,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=checkNullId",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=checkNullId",
               data: param,
               success: function (res) {
                 if (JSON.parse(res).length === 1) {
@@ -81,7 +81,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=regId",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=regId",
               data: t.dataObj,
               success: function (res) {
                 console.log(res);

@@ -38,7 +38,7 @@
                   if (!t.books[i].bookOriginDetail) {
                     $.ajax({
                       type: "POST",
-                      url: "http://jesusville.or.kr/lib/api/books.php?act=getBookDetailInfo",
+                      url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookDetailInfo",
                       data: {
                         recKey: recKeyCde,
                       },

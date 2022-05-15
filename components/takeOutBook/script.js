@@ -20,7 +20,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=getMemberList",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=getMemberList",
               data: {
                 sort: "y",
                 srchType: "all",
@@ -83,7 +83,7 @@
                 if (children[key].name == "memberInfoPopup") {
                   $.ajax({
                     type: "POST",
-                    url: "http://jesusville.or.kr/lib/api/books.php?act=getRentHistoryByMbrCde",
+                    url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getRentHistoryByMbrCde",
                     data: {
                       mbrCde: mbrCde,
                       test: "test",
@@ -154,7 +154,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getBookInfoByBookCde",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookInfoByBookCde",
               data: {
                 bookCde: $(target.currentTarget).val(),
               },
@@ -208,7 +208,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=takeOutBook",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=takeOutBook",
               data: {
                 bookCde: t.bookInfo.bookCde,
                 mbrCde: t.memberInfo.mbrCde,
@@ -220,14 +220,14 @@
                   $.ajax({
                     //도서db에 +1
                     type: "POST",
-                    url: "http://jesusville.or.kr/lib/api/books.php?act=increaseRentCnt",
+                    url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=increaseRentCnt",
                     data: { bookCde: t.bookInfo.bookCde },
                     success: function (res) {
                       if (res == 1) {
                         $.ajax({
                           //회원db에 +1
                           type: "POST",
-                          url: "http://jesusville.or.kr/lib/api/members.php?act=increaseRentCnt",
+                          url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=increaseRentCnt",
                           data: { mbrCde: t.memberInfo.mbrCde },
                           success: function (res) {
                             if ((res = 1)) {

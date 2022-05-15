@@ -52,7 +52,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=chkDuplId",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=chkDuplId",
               data: { id: id },
               success: function (res) {
                 let objRes = JSON.parse(res);
@@ -62,7 +62,7 @@
                 } else {
                   $.ajax({
                     type: "POST",
-                    url: "http://jesusville.or.kr/lib/api/members.php?act=signUp",
+                    url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=signUp",
                     data: paramData,
                     success: function (res) {
                       if (res) {
@@ -84,7 +84,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=signUp",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=signUp",
               data: paramData,
               success: function (res) {
                 if (res) {
@@ -131,7 +131,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=chkDuplId",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=chkDuplId",
               data: { id: id },
               success: function (res) {
                 let objRes = JSON.parse(res);

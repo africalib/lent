@@ -38,7 +38,7 @@
             const t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=getBoardList",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=getBoardList",
               data: {
                 boardCde: "100",
                 dataMxCnt: 5,
@@ -53,7 +53,7 @@
             const t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getNewBookList",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getNewBookList",
               data: {
                 boardCde: "110",
                 dataMxCnt: 5,

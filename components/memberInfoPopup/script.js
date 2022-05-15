@@ -33,7 +33,7 @@
 
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/members.php?act=editMemberInfo",
+                url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=editMemberInfo",
                 data: dataObj,
                 success: function (res) {
                   // console.log(res);
@@ -54,7 +54,7 @@
             console.log(t.listType);
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getRentHistoryByMbrCde",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getRentHistoryByMbrCde",
               data: {
                 mbrCde: t.memberInfo.mbrCde,
                 listType: t.listType,

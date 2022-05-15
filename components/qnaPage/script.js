@@ -24,7 +24,7 @@
             if (confirm("정말로 삭제하시겠습니까?")) {
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/etc.php?act=deleteBoard",
+                url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=deleteBoard",
                 data: {
                   boardCde: "100",
                   seq: t.boardInfo.seq,
@@ -43,7 +43,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=regBoard",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=regBoard",
               data: {
                 id: mainPage.userInfo.mbrId,
                 boardCde: "120",
@@ -61,7 +61,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=editBoard",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=editBoard",
               data: {
                 boardCde: "120",
                 seq: t.boardInfo.seq,
@@ -91,7 +91,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=getComentList",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=getComentList",
               data: {
                 seq: t.boardInfo.seq,
                 boardCde: "120",
@@ -132,7 +132,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=regComent",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=regComent",
               data: {
                 id: mainPage.userInfo.mbrId,
                 boardCde: "120",

@@ -15,7 +15,7 @@
             if (confirm("초기화를 진행하시겠습니까?")) {
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/books.php?act=initRank",
+                url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=initRank",
                 success: function (res) {
                   if (res == 1) {
                     alert("초기화되었습니다.");
@@ -43,7 +43,7 @@
                 $.ajax({
                   type: "POST",
                   data: data,
-                  url: "http://jesusville.or.kr/lib/api/members.php?act=updateRentCntAndReturnDate",
+                  url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=updateRentCntAndReturnDate",
                   success: function (res) {
                     // console.log(res);
                     // return;

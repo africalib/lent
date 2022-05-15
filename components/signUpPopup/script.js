@@ -27,7 +27,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=signUpWithoutAccount",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=signUpWithoutAccount",
               data: {
                 name: $('#popup_signUp [name="mbrNm"]').val(),
                 birth: $('#popup_signUp [name="mbrBirth"]').val(),

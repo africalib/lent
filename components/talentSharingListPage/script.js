@@ -42,7 +42,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=getBoardList",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=getBoardList",
               data: {
                 boardCde: "150",
                 keyword: $("#" + name + "_kwd").val(),

@@ -105,14 +105,14 @@
 					//after;
 					$.ajax({
 						type: 'POST',
-						url: 'http://jesusville.or.kr/lib/api/books.php?act=regAuthorCode',
+						url: 'https://jesusvillech.cafe24.com/lib/api/books.php?act=regAuthorCode',
 						data: {bookCde: bookCdes, chkYn : 'y'},
 						success: function(res){
 							if(res == 1){
 								if(!confirm('정상적으로 인쇄가 되었습니까?')){
 									$.ajax({
 										type: 'POST',
-										url: 'http://jesusville.or.kr/lib/api/books.php?act=regAuthorCode',
+										url: 'https://jesusvillech.cafe24.com/lib/api/books.php?act=regAuthorCode',
 										data: {bookCde: bookCdes, chkYn : 'n'},
 										success: function(res){
 											if(res == 1){

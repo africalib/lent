@@ -30,7 +30,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getDuplBookByIsbn",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getDuplBookByIsbn",
               data: { isbn: isbn },
               success: function (res) {
                 if (JSON.parse(res).length) {
@@ -44,7 +44,7 @@
                   } else {
                     $.ajax({
                       type: "POST",
-                      url: "http://jesusville.or.kr/lib/api/books.php?act=getBookInfoByIsbn",
+                      url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookInfoByIsbn",
                       data: { isbn: isbn },
                       success: function (res) {
                         parser = new DOMParser();
@@ -77,7 +77,7 @@
                 } else {
                   $.ajax({
                     type: "POST",
-                    url: "http://jesusville.or.kr/lib/api/books.php?act=getBookInfoByIsbn",
+                    url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookInfoByIsbn",
                     data: { isbn: isbn },
                     success: function (res) {
                       parser = new DOMParser();
@@ -232,7 +232,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=regBook_v1",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=regBook_v1",
               data: t.bookInfo,
               success: function (res) {
                 // console.log(res);
@@ -251,7 +251,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getBooksWithoutAuthorCde",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBooksWithoutAuthorCde",
               success: function (res) {
                 t.booksWithoutAuthorCde = JSON.parse(res);
                 t.$nextTick(function () {
@@ -276,7 +276,7 @@
 
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/books.php?act=deleteBooks",
+                url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=deleteBooks",
                 data: {
                   bookCde: tmpArr,
                 },
@@ -315,7 +315,7 @@
                 if (children[key].name == "editBookPopup") {
                   $.ajax({
                     type: "POST",
-                    url: "http://jesusville.or.kr/lib/api/books.php?act=getBookInfoByBookCde",
+                    url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookInfoByBookCde",
                     data: {
                       bookCde: bookCde,
                     },
@@ -371,7 +371,7 @@
             if (confirm("아래 저자코드가 없는 책들을 처리합니다.\n정말로 처리하시겠습니까?")) {
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/tmpApi.php?act=tmpDelAuthorCde",
+                url: "https://jesusvillech.cafe24.com/lib/api/tmpApi.php?act=tmpDelAuthorCde",
                 success: function (res) {
                   // console.log(res);
                   // return;

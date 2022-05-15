@@ -25,7 +25,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getBookListFromCstm",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookListFromCstm",
               data: {
                 srchType: srchType,
                 bookKwd: bookKwd,

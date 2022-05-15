@@ -29,7 +29,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getBookListFromMngBook",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getBookListFromMngBook",
               data: {
                 srchType: srchType,
                 bookKwd: bookKwd,
@@ -85,7 +85,7 @@
                 if (children[key].name == "editBookPopup") {
                   $.ajax({
                     type: "POST",
-                    url: "http://jesusville.or.kr/lib/api/books.php?act=getRentHistoryByBookCde",
+                    url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getRentHistoryByBookCde",
                     data: {
                       bookCde: t.books.bookList[idx].bookCde,
                       listType: "all",

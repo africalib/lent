@@ -24,7 +24,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/members.php?act=getMemberList",
+              url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=getMemberList",
               data: {
                 sort: $('#mbrSrchSection [name="sort"]').val(),
                 srchType: $('#mbrSrchSection [name="srchType"]').val(),
@@ -45,7 +45,7 @@
             if (confirm("가입을 승인하시겠습니까?")) {
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/members.php?act=approveMember",
+                url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=approveMember",
                 data: {
                   mbrSeq: seq,
                 },
@@ -75,7 +75,7 @@
                     if (t.memberList[i].mbrSeq == mbrSeq) {
                       $.ajax({
                         type: "POST",
-                        url: "http://jesusville.or.kr/lib/api/books.php?act=getRentHistoryByMbrCde",
+                        url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getRentHistoryByMbrCde",
                         data: {
                           mbrCde: t.memberList[i].mbrCde,
                           listType: "all",
@@ -129,7 +129,7 @@
             if (confirm("탈퇴처리를 진행하시겠습니까?")) {
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/members.php?act=deleteMember",
+                url: "https://jesusvillech.cafe24.com/lib/api/members.php?act=deleteMember",
                 data: {
                   mbrSeq: seq,
                 },

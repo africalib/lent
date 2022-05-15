@@ -94,7 +94,7 @@
 					let nextCde = Number(parentParam.sufBarcode) + Number(parentParam.labelCnt);
 					$.ajax({
 						type: 'POST',
-						url: 'http://jesusville.or.kr/lib/api/books.php?act=setNewOrderedCode',
+						url: 'https://jesusvillech.cafe24.com/lib/api/books.php?act=setNewOrderedCode',
 						data: {nextCde: nextCde},
 						success: function(res){
 							opener.document.getElementById("barcode_sufOrder").value = res.trim();

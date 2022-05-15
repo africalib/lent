@@ -50,7 +50,7 @@
             $("#qnaListPage_pagingBox").find(".page-idx").removeClass("bg-5ecf5e");
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=getBoardList",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=getBoardList",
               data: {
                 boardCde: "120",
                 keyword: $("#qnaListPage_kwd").val(),

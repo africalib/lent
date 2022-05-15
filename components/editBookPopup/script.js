@@ -49,7 +49,7 @@
               // if(true){
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/books.php?act=deleteBook",
+                url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=deleteBook",
                 data: { bookCde: t.bookCde },
                 success: function (res) {
                   // console.log(res);
@@ -74,7 +74,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=editBookInfo",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=editBookInfo",
               data: data,
               success: function (res) {
                 // console.log(res);
@@ -109,7 +109,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getRentHistoryByBookCde",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getRentHistoryByBookCde",
               data: {
                 bookCde: t.bookCde,
                 listType: t.listType,

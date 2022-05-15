@@ -24,7 +24,7 @@
             if (confirm("정말로 삭제하시겠습니까?")) {
               $.ajax({
                 type: "POST",
-                url: "http://jesusville.or.kr/lib/api/etc.php?act=deleteBoard",
+                url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=deleteBoard",
                 data: {
                   boardCde: "140",
                   seq: t.boardInfo.seq,
@@ -43,7 +43,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=regBoard",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=regBoard",
               data: {
                 id: mainPage.userInfo.mbrId,
                 boardCde: "140",
@@ -60,7 +60,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=editBoard",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=editBoard",
               data: {
                 boardCde: "140",
                 seq: t.boardInfo.seq,
@@ -90,7 +90,7 @@
             let t = this;
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=getComentList",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=getComentList",
               data: {
                 seq: t.boardInfo.seq,
                 boardCde: "140",
@@ -131,7 +131,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/etc.php?act=regComent",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=regComent",
               data: {
                 id: mainPage.userInfo.mbrId,
                 boardCde: "140",
@@ -152,7 +152,7 @@
           test: function () {
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/sms.php?act=overdueChk",
+              url: "https://jesusvillech.cafe24.com/lib/api/sms.php?act=overdueChk",
               success: function (res) {
                 console.log(res);
               },

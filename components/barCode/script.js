@@ -21,7 +21,7 @@
 
             $.ajax({
               type: "POST",
-              url: "http://jesusville.or.kr/lib/api/books.php?act=getNewOrderedCode",
+              url: "https://jesusvillech.cafe24.com/lib/api/books.php?act=getNewOrderedCode",
               success: function (res) {
                 t.orderedBarcode = res.trim();
               },
