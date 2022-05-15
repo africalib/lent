@@ -33,7 +33,7 @@
                   console.log(res);
                   if (res == 1) {
                     alert("삭제되었습니다.");
-                    mainPage.viewPage = "notice-list-page";
+                    mainPage.viewPage = "lib-activity-list-page";
                   }
                 },
               });
@@ -167,6 +167,9 @@
         created: function () {
           var t = this;
           t.mode = mainPage.requestMode;
+
+          const hashArr = location.hash.split("/");
+          t.seq = hashArr[hashArr.length - 1];
         },
         mounted: function () {
           let t = this;
@@ -176,15 +179,49 @@
             disableResizeEditor: true,
           });
 
-          if (t.mode == "view" || t.mode == "edit") t.summerNoteOnOff(false);
-          t.$nextTick(function () {
-            setTimeout(function () {
-              if (t.boardInfo.seq) {
-                if (t.boardInfo.content) $(".note-editable").html(t.boardInfo.content);
+          if (t.seq) {
+            t.mode = mainPage?.userInfo?.mbrGrade === "999" ? "edit" : "view";
+
+            $.ajax({
+              type: "POST",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=getBoardList",
+              data: {
+                boardCde: "120",
+                seq: t.seq,
+              },
+              dataType: "json",
+              success: function (res) {
+                t.boardInfo = {
+                  seq: res.boardList[0].seq,
+                  title: res.boardList[0].title,
+                  content: res.boardList[0].content,
+                  coments: [],
+                };
+
+                $(".note-editable").html(t.boardInfo.content);
                 t.getComentList();
-              }
-            }, 50);
-          });
+              },
+            });
+          } else {
+            t.mode = "new";
+            t.boardInfo = {
+              seq: null,
+              title: "",
+              content: "",
+              coments: [],
+            };
+          }
+
+          if (t.mode == "view" || t.mode == "edit") t.summerNoteOnOff(false);
+
+          // t.$nextTick(function () {
+          //   setTimeout(function () {
+          //     if (t.boardInfo.seq) {
+          //       if (t.boardInfo.content) $(".note-editable").html(t.boardInfo.content);
+          //       t.getComentList();
+          //     }
+          //   }, 50);
+          // });
         },
       });
     });

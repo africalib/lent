@@ -366,24 +366,23 @@
             }
           },
 
-          deleteBooks2: function () {
-            let t = this;
-            if (confirm("아래 저자코드가 없는 책들을 처리합니다.\n정말로 처리하시겠습니까?")) {
-              $.ajax({
-                type: "POST",
-                url: "https://jesusvillech.cafe24.com/lib/api/tmpApi.php?act=tmpDelAuthorCde",
-                success: function (res) {
-                  // console.log(res);
-                  // return;
-                  //왜 성공을 못하지? 500에러 뭐지? 20220313
-                },
-                error: function (e) {
-                  alert("정상적을 처리되었습니다.");
-                  t.getBooksWithoutAuthorCde();
-                },
-              });
-            }
-          },
+          // deleteBooks2: function () {
+          //   let t = this;
+          //   if (confirm("아래 저자코드가 없는 책들을 처리합니다.\n정말로 처리하시겠습니까?")) {
+          //     $.ajax({
+          //       type: "POST",
+          //       url: "https://jesusvillech.cafe24.com/lib/api/tmpApi.php?act=tmpDelAuthorCde",
+          //       success: function (res) {
+          //         alert("정상적을 처리되었습니다.");
+          //         t.getBooksWithoutAuthorCde();
+          //       },
+          //       error: function (e) {
+          //         alert("정상적을 처리되었습니다.");
+          //         t.getBooksWithoutAuthorCde();
+          //       },
+          //     });
+          //   }
+          // },
         },
         created: function () {
           $(document.head).append('<link href="components/' + name + "/style.css" + '" rel="stylesheet" />');

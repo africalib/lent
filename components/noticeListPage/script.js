@@ -19,6 +19,11 @@
               return;
             }
             let t = this;
+            seq = seq || "";
+
+            console.log(mode);
+            console.log(mainPage.userInfo.mbrGrade);
+
             mainPage.headToPage("notice-page/" + seq);
             mainPage.requestMode = regId == mainPage.userInfo.mbrId ? "edit" : mode;
 

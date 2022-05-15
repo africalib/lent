@@ -22,6 +22,13 @@ let mainPage = new Vue({
     shortNewBookList: [],
   },
   methods: {
+    logout: function () {
+      let t = this;
+      t.userInfo = {};
+      t.menuControl(false);
+      sessionStorage.removeItem("signin");
+      location.href = "/";
+    },
     menuControl: function (boolean) {
       let t = this;
       console.log(t.version);
@@ -191,6 +198,13 @@ let mainPage = new Vue({
   },
   created: function () {
     let t = this;
+    const signin = sessionStorage.getItem("signin");
+
+    if (signin) {
+      console.log(t.userInfo);
+      t.userInfo = JSON.parse(signin);
+      console.log(t.userInfo);
+    }
 
     window.onhashchange = function () {
       t.watch();
@@ -202,7 +216,7 @@ let mainPage = new Vue({
     const t = this;
     t.controlByVersion();
     t.resizeWindow();
-    t.userInfo = {};
+    //t.userInfo = {};
     t.menuHover();
 
     window.addEventListener(

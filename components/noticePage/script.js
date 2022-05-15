@@ -54,8 +54,9 @@
               success: function (res) {
                 if (res == 1) {
                   alert("등록되었습니다.");
-                  t.mode = "view";
-                  if (t.mode == "view") $("#summernote").summernote("disable");
+                  location.href = "/#notice-list-page";
+                  //t.mode = "view";
+                  //$("#summernote").summernote("disable");
                 } else {
                   alert("서버에 오류가 있습니다.");
                 }
@@ -167,8 +168,8 @@
         },
         created: function () {
           var t = this;
-          //t.mode = mainPage.requestMode || "view";
-          t.mode = "view";
+          // t.mode = mainPage.requestMode || "view";
+          //t.mode = "view";
 
           const hashArr = location.hash.split("/");
           t.seq = hashArr[hashArr.length - 1];
@@ -182,28 +183,40 @@
             disableResizeEditor: true,
           });
 
+          if (t.seq) {
+            t.mode = mainPage?.userInfo?.mbrGrade === "999" ? "edit" : "view";
+
+            $.ajax({
+              type: "POST",
+              url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=getBoardList",
+              data: {
+                boardCde: "100",
+                seq: t.seq,
+              },
+              dataType: "json",
+              success: function (res) {
+                t.boardInfo = {
+                  seq: res.boardList[0].seq,
+                  title: res.boardList[0].title,
+                  content: res.boardList[0].content,
+                  coments: [],
+                };
+
+                $(".note-editable").html(t.boardInfo.content);
+                t.getComentList();
+              },
+            });
+          } else {
+            t.mode = "new";
+            t.boardInfo = {
+              seq: null,
+              title: "",
+              content: "",
+              coments: [],
+            };
+          }
+
           if (t.mode == "view" || t.mode == "edit") t.summerNoteOnOff(false);
-
-          $.ajax({
-            type: "POST",
-            url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=getBoardList",
-            data: {
-              boardCde: "100",
-              seq: t.seq,
-            },
-            dataType: "json",
-            success: function (res) {
-              t.boardInfo = {
-                seq: res.boardList[0].seq,
-                title: res.boardList[0].title,
-                content: res.boardList[0].content,
-                coments: [],
-              };
-
-              $(".note-editable").html(t.boardInfo.content);
-              t.getComentList();
-            },
-          });
 
           // t.$nextTick(function () {
           //   setTimeout(function () {

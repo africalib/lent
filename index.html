@@ -45,7 +45,7 @@
 				<div class="absolute right0 top10 media-mx-w767-none" v-cloak v-else="userInfo.mbrSeq">
 					<span class="font2rem">{{userInfo.mbrNm}}</span>님
 					<!-- <button class="btn btn-default mg-t-6">설정</button> -->
-					<button class="btn btn-danger v-middle radius0 w80 mg0auto mg-t-6" @click="userInfo = {};">로그아웃</button>
+					<button class="btn btn-danger v-middle radius0 w80 mg0auto mg-t-6" @click="logout()">로그아웃</button>
 				</div>
 				<div class="absolute top0 right15 none media-mx-w767-block">
 					<!-- <span><img src="assets/img/lib-menu-icon.svg" width="40" class="mg-t5" @click="menuControl();"></span> -->
@@ -72,7 +72,7 @@
 									<span class="block mg-b3"><span class="font2rem">{{userInfo.mbrNm}}</span>님</span>
 									<span>
 										<button class="btn btn-default v-top radius0 w80 mg0auto" @click="menuControl(false);">설정</button>
-										<button class="btn btn-danger v-top radius0 w80 mg0auto" @click="userInfo = {}; menuControl(false);">로그아웃</button>
+										<button class="btn btn-danger v-top radius0 w80 mg0auto" @click="logout()">로그아웃</button>
 									</span>
 								</span>
 							</li>

@@ -28,6 +28,7 @@
                 if (objRes.length) {
                   mainPage.userInfo = objRes[0];
                   mainPage.viewPage = "home";
+                  sessionStorage.setItem("signin", JSON.stringify(mainPage.userInfo));
 
                   if (mainPage.userInfo.approvalYn == "y") {
                     alert("로그인되었습니다.");

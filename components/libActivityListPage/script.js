@@ -19,7 +19,7 @@
               return;
             }
             let t = this;
-            mainPage.headToPage("lib-activity-page");
+            mainPage.headToPage("lib-activity-page/" + seq);
             mainPage.requestMode = regId == mainPage.userInfo.mbrId ? "edit" : mode;
 
             if (mode != "new") {
@@ -57,8 +57,6 @@
               },
               success: function (res) {
                 // console.log(JSON.parse(res));
-                console.log(res);
-                return;
                 t.boardList = JSON.parse(res);
                 t.boardList.offset = pageOffsetIdx;
 
