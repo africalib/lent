@@ -19,6 +19,7 @@
               return;
             }
             let t = this;
+            seq = seq || "";
             mainPage.headToPage("lib-activity-page/" + seq);
             mainPage.requestMode = regId == mainPage.userInfo.mbrId ? "edit" : mode;
 
