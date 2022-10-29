@@ -41,6 +41,15 @@
           },
           reg_board: function () {
             let t = this;
+            if($("#" + name + "_title").val() == ''){
+              alert('제목을 입력해주세요.');
+              return;
+            }
+            if($("#summernote").val() == ''){
+              alert('내용을 입력해주세요.');
+              return;
+            }
+
             $.ajax({
               type: "POST",
               url: "https://jesusvillech.cafe24.com/lib/api/etc.php?act=regBoard",
