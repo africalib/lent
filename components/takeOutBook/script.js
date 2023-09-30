@@ -239,6 +239,8 @@
                               alert("대여처리가 완료되었습니다.");
                               t.bookInfo = { bookCde: "" };
                               $("#takeOutBook_bookCde").val("").focus();
+
+                              t.memberInfo.rentBookCnt++;
                             }
                           },
                         });
