@@ -204,6 +204,7 @@
 
             console.log(111);
             console.log(t.memberInfo.mbrMxCnt, t.memberInfo.rentBookCnt);
+            console.log(t.memberInfo.mbrMxCnt <= t.memberInfo.rentBookCnt);
             console.log(111);
 
             if (t.memberInfo.mbrMxCnt <= t.memberInfo.rentBookCnt) {
