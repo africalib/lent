@@ -206,7 +206,7 @@
             console.log(t.memberInfo.mbrMxCnt, t.memberInfo.rentBookCnt);
             console.log(111);
 
-            if (t.memberInfo.mbrMxCnt < t.memberInfo.rentBookCnt) {
+            if (t.memberInfo.mbrMxCnt <= t.memberInfo.rentBookCnt) {
               alert("회원의 최대 대여량을 넘을 수 없습니다.");
               return;
             }
