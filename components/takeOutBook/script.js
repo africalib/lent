@@ -241,6 +241,9 @@
                               $("#takeOutBook_bookCde").val("").focus();
 
                               t.memberInfo.rentBookCnt++;
+                              console.log(2222);
+                              console.log(t.memberInfo.rentBookCnt);
+                              console.log(2222);
                             }
                           },
                         });
